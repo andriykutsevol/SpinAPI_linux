@@ -1,1 +1,1 @@
-# SpinAPI_linux
+# SpinAPI_linux (test repository)
