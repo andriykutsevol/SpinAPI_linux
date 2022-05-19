@@ -8,7 +8,6 @@
 #endif
 
 #include "ftd2xx.h"
-
 #include "debug.h"
 #include "spinapi.h"
 #include "driver-os.h"
