@@ -1642,11 +1642,14 @@ do_os_init (int board)
 
   if (board < num_pci_boards)
     {
+      
+      printf("%s: \n", "sfdbg: src/spinapi.c: board < num_pci_boards ");
       debug (DEBUG_INFO, "do_os_init: initializing pci");
       dev_id = os_init (board);
     }
   else
     {
+      printf("%s: \n", "sfdbg: src/spinapi.c: board > num_pci_boards ");
       debug (DEBUG_INFO, "do_os_init: initializing usb");
       dev_id = os_usb_init (board - num_pci_boards);
       usb_reset_gpif (board - num_pci_boards);
