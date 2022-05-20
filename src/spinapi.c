@@ -1655,6 +1655,7 @@ do_os_init (int board)
       usb_reset_gpif (board - num_pci_boards);
     }
 
+  printf("%s: %d\n", "sfdbg: src/spinapi.c: dev_id", dev_id);
   return dev_id;
 }
 
