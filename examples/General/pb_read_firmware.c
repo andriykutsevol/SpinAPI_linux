@@ -39,7 +39,7 @@ int main(int argc, char **argv)
 	// experiencing 
 	// pb_set_debug(1);
 
-	printf("zCopyright (c) 2010 SpinCore Technologies, Inc.\n\n");
+	printf("Copyright (c) 2010 SpinCore Technologies, Inc.\n\n");
 
 	printf("Using SpinAPI library version %s\n", pb_get_version());
 
