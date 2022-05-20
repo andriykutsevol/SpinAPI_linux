@@ -130,6 +130,8 @@ pb_count_boards (void)
 
   num_usb_devices = os_usb_count_devices (0);
 
+  printf("%s: num_pci_boards:%d\n", "sfdbg: src/apinapi.c: pb_count_boards():", num_pci_boards);
+
   if (num_usb_devices < 0)
     {
       debug (DEBUG_ERROR, "pb_count_boards(): error counting USB boards.");
@@ -201,6 +203,7 @@ pb_init (void)
 
       if (dev_id == -1)
         {
+          printf("%s: ","sofsafe_debug: src/spinapi.c: pb_init() return -1");
           debug (DEBUG_WARNING, "pb_init error (os_init failed)");
           return -1;
         }
