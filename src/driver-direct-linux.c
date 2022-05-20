@@ -109,20 +109,26 @@ os_init (int card_num)
 {
   num_cards = os_count_boards (0x10e8);
   if (num_cards < 0) {
+    printf("%s:\n","sfdbg: srd/driver-direct-linux.c: os_init() 1");
     debug (DEBUG_ERROR, "os_init: os_count_cards() failed.");
     return -1;
   }
 
   if (card_num >= num_cards || card_num < 0) {
+    printf("%s:\n","sfdbg: srd/driver-direct-linux.c: os_init() 2");
     debug (DEBUG_ERROR, "os_init: Card number out of range");
     return -1;
   }
+
+  printf("%s:\n","sfdbg: srd/driver-direct-linux.c: os_init() 3");
 
   // print out some info about the system to the log to aid debugging
   FILE *f;
   char buf[512];
   f = fopen ("/proc/version", "r");
 	
+  printf("%s:\n","sfdbg: srd/driver-direct-linux.c: os_init() 4");
+
   if (!f) {
     debug (DEBUG_INFO, "os_init: unable to open /proc/version\n");
   }
@@ -133,16 +139,22 @@ os_init (int card_num)
 	
   fclose (f);
 
+  printf("%s:\n","sfdbg: srd/driver-direct-linux.c: os_init() 5");
+
   // get access to the IO ports
   if (iopl (3) < 0)
     {
+      printf("%s:\n","sfdbg: srd/driver-direct-linux.c: os_init() 6");
       debug (DEBUG_ERROR, "os_init: unable to get IO permissions. make sure you are running as root");
       return -1;
     }
   else
     {
+      printf("%s:\n","sfdbg: srd/driver-direct-linux.c: os_init() 7");
       debug (DEBUG_ERROR, "os_init: iopl() successful.");
     }
+
+  printf("%s:\n","sfdbg: srd/driver-direct-linux.c: os_init() 8");
 
   return dev_id_array[card_num];
 
