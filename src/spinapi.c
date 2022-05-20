@@ -119,6 +119,8 @@ pb_count_boards (void)
 
   num_pci_boards = os_count_boards (VENDID);
 
+  printf("%s: %d\n", "sfdbg: src/apinapi.c: pb_count_boards(): num_pci_boards:", num_pci_boards);
+
   if (num_pci_boards < 0)
     {
       debug (DEBUG_ERROR, "pb_count_boards(): error counting PCI boards. "
