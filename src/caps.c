@@ -171,9 +171,9 @@ get_caps (BOARD_INFO * board, int dev_id)
 			
 		// PCI Express PulseBlaster
 		case 0x887A:
+			printf("sfdbg: src/caps.c: REG_FIRMWARE_ID_PCIE << 2: %d \n", REG_FIRMWARE_ID_PCIE << 2);
 			firmware_id = reg_read_simple (REG_FIRMWARE_ID_PCIE << 2);
-			printf("sfdbg: src/spinapi.c: REG_FIRMWARE_ID_PCIE << 2: %d \n", REG_FIRMWARE_ID_PCIE << 2);
-			printf("sfdbg: src/spinapi.c: firmware_id: %d \n", firmware_id);
+			printf("sfdbg: src/caps.c: firmware_id: %d \n", firmware_id);
 			debug (DEBUG_INFO, "Detected PulseBlaster PCIe board (r 0x%x)", firmware_id);
 
 			// the only existing designs for this board have the FF fix
