@@ -237,7 +237,7 @@ os_inw (int card_num, unsigned int address)
     return -1;
   }
 
-  printf("sfdbg: src/driver-direct-linux.c: card_num: %d: base_addr_array[card_num]: %d, address: %d \n", card_num, base_addr_array[card_num], address);
+  printf("sfdbg: src/driver-direct-linux.c: card_num: %d: base_addr_array[card_num]: %x, address: %d \n", card_num, base_addr_array[card_num], address);
 
   return inl_p (base_addr_array[card_num] + address);
 }
