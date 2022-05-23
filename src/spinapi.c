@@ -122,7 +122,7 @@ pb_count_boards (void)
 
   num_pci_boards = os_count_boards (VENDID);
 
-  printf("%s: num_pci_boards:%d\n", "sfdbg: src/apinapi.c: pb_count_boards():", num_pci_boards);
+  ////printf("%s: num_pci_boards:%d\n", "sfdbg: src/apinapi.c: pb_count_boards():", num_pci_boards);
 
   if (num_pci_boards < 0)
     {
@@ -133,7 +133,7 @@ pb_count_boards (void)
 
   num_usb_devices = os_usb_count_devices (0);
 
-  printf("%s: num_pci_boards:%d\n", "sfdbg: src/apinapi.c: pb_count_boards():", num_pci_boards);
+  ////printf("%s: num_pci_boards:%d\n", "sfdbg: src/apinapi.c: pb_count_boards():", num_pci_boards);
 
   if (num_usb_devices < 0)
     {
@@ -206,7 +206,7 @@ pb_init (void)
 
       if (dev_id == -1)
         {
-          printf("%s: ","sofsafe_debug: src/spinapi.c: pb_init() return -1");
+          //printf("%s: ","sofsafe_debug: src/spinapi.c: pb_init() return -1");
           debug (DEBUG_WARNING, "pb_init error (os_init failed)");
           return -1;
         }
@@ -1646,19 +1646,19 @@ do_os_init (int board)
   if (board < num_pci_boards)
     {
       
-      printf("%s: \n", "sfdbg: src/spinapi.c: board < num_pci_boards ");
+      //printf("%s: \n", "sfdbg: src/spinapi.c: board < num_pci_boards ");
       debug (DEBUG_INFO, "do_os_init: initializing pci");
       dev_id = os_init (board);
     }
   else
     {
-      printf("%s: \n", "sfdbg: src/spinapi.c: board > num_pci_boards ");
+      //printf("%s: \n", "sfdbg: src/spinapi.c: board > num_pci_boards ");
       debug (DEBUG_INFO, "do_os_init: initializing usb");
       dev_id = os_usb_init (board - num_pci_boards);
       usb_reset_gpif (board - num_pci_boards);
     }
 
-  printf("%s: %d\n", "sfdbg: src/spinapi.c: dev_id", dev_id);
+  //printf("%s: %d\n", "sfdbg: src/spinapi.c: dev_id", dev_id);
   return dev_id;
 }
 
