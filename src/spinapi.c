@@ -1619,7 +1619,7 @@ pb_inw (unsigned int address)
     }
 
   // amcc chip does not use 32 bit I/O, so this must be our custom PCI core
-  printf("sfdbg: src/spinapi.c: pb_inw(): address: %d \n", address);
+  printf("sfdbg: src/spinapi.c: pb_inw(): address: %x \n", address);
   return os_inw (cur_board, address);
 }
 
