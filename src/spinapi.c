@@ -2,7 +2,8 @@
 #include <stdlib.h>
 #include <math.h>
 #include <string.h>
- 
+
+
 #ifndef __LINUX__
 	#include <Windows.h>
 #endif
@@ -18,21 +19,6 @@
 #include "if.h"
 #include "usb.h"
 
-// Since not all users define these at compile time
-#ifndef VER_STRING_API
-#define VER_STRING_API "custom"
-#endif
-
-/*
-*
-*
-*  SpinPTS Includes & Defines
-*
-*
-*/
-#define _PTS_SET_NUM_DATA	3
-#define ERROR_STR_SIZE	    25
-
 #include <stdio.h>
 #include <stdarg.h>
 
@@ -47,6 +33,22 @@ inline void spinapi_log(const char *format, ...){
 
 }
 
+
+
+// Since not all users define these at compile time
+#ifndef VER_STRING_API
+#define VER_STRING_API "custom"
+#endif
+
+/*
+*
+*
+*  SpinPTS Includes & Defines
+*
+*
+*/
+#define _PTS_SET_NUM_DATA	3
+#define ERROR_STR_SIZE	    25
 
 
 static char *spinpts_version = VER_STRING_API;
