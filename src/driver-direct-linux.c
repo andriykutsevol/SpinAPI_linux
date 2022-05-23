@@ -71,9 +71,6 @@ os_count_boards (int vend_id)
     detected_dev_id = 0x0000FFFF & id;
     detected_base &= ~(0x01);	// bit 0 of base address is the IO/Mem bit and not part of the address
 
-    printf("sfdbg: srd/driver-direct-linux.c: os_count_boards(): dummy:%x id:%x name:%s detected_base:%x \n", dummy, id, name, detected_base);
-    printf("sfdbg: srd/driver-direct-linux.c: os_count_boards(): detected vid:pid: %x:%x \n", detected_vend_id, detected_dev_id);
-
     if (detected_vend_id == vend_id) {
 			if (i >= MAX_NUM_BOARDS) {
 	      debug (DEBUG_ERROR, "os_count_boards: Found too many boards");
@@ -85,6 +82,10 @@ os_count_boards (int vend_id)
 			debug (DEBUG_ERROR, "os_count_boards: Found dev_id 0x%x, base_address 0x%x\n", 
 			  detected_dev_id, 
 			  detected_base);
+
+      printf("sfdbg: srd/driver-direct-linux.c: os_count_boards(): dummy:%x id:%x name:%s detected_base:%x \n", dummy, id, name, detected_base);
+      printf("sfdbg: srd/driver-direct-linux.c: os_count_boards(): detected vid:pid: %x:%x \n", detected_vend_id, detected_dev_id);
+
 
 			base_addr_array[i] = detected_base;
 			dev_id_array[i] = detected_dev_id;
