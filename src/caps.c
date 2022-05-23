@@ -18,7 +18,7 @@
 int
 get_caps (BOARD_INFO * board, int dev_id)
 {
-  printf("sfdbg: src/caps.c: dev_id: %d \n", dev_id);
+  printf("sfdbg: src/caps.c: dev_id: %x \n", dev_id);
   unsigned int firmware_id, firmware_id_save, caps_assigned;
   debug (DEBUG_INFO, "dev_id=0x%x", dev_id);
   memset (board, 0, sizeof (BOARD_INFO));
