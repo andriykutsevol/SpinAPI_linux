@@ -41,7 +41,7 @@ inline void spinapi_log(const char *format, ...){
     va_list ap;
     /* инициализация ptr так, чтобы он указывал на первый аргумент после форматной строки*/
     va_start (ap, format);
-    vprintf(my_log, format, ap);
+    vprintf(format, ap);
 
     va_end(ap);
 
