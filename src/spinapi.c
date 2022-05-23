@@ -135,7 +135,7 @@ pb_count_boards (void)
 
   num_pci_boards = os_count_boards (VENDID);
 
-  printf("%s: num_pci_boards:%d\n", "sfdbg: src/apinapi.c: pb_count_boards():", num_pci_boards);
+  spinapi_log("%s: num_pci_boards:%d\n", "sfdbg: src/apinapi.c: pb_count_boards():", num_pci_boards);
 
   if (num_pci_boards < 0)
     {
