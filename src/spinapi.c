@@ -33,6 +33,22 @@
 #define _PTS_SET_NUM_DATA	3
 #define ERROR_STR_SIZE	    25
 
+#include <stdio.h>
+#include <stdarg.h>
+
+inline void spinapi_log(const char *format, ...){
+
+    va_list ap;
+    /* инициализация ptr так, чтобы он указывал на первый аргумент после форматной строки*/
+    va_start (ap, format);
+    vprintf(my_log, format, ap);
+
+    va_end(ap);
+
+}
+
+
+
 static char *spinpts_version = VER_STRING_API;
 static int  spinpts_err = -1;
 static char spinpts_err_buf[ERROR_STR_SIZE];
