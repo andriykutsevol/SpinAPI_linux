@@ -19,21 +19,6 @@
 #include "if.h"
 #include "usb.h"
 
-#include <stdio.h>
-#include <stdarg.h>
-
-inline void spinapi_log(const char *format, ...){
-
-    va_list ap;
-    /* инициализация ptr так, чтобы он указывал на первый аргумент после форматной строки*/
-    va_start (ap, format);
-    vprintf(format, ap);
-
-    va_end(ap);
-
-}
-
-
 
 // Since not all users define these at compile time
 #ifndef VER_STRING_API
@@ -137,7 +122,7 @@ pb_count_boards (void)
 
   num_pci_boards = os_count_boards (VENDID);
 
-  spinapi_log("%s: num_pci_boards:%d\n", "sfdbg: src/apinapi.c: pb_count_boards():", num_pci_boards);
+  printf("%s: num_pci_boards:%d\n", "sfdbg: src/apinapi.c: pb_count_boards():", num_pci_boards);
 
   if (num_pci_boards < 0)
     {
