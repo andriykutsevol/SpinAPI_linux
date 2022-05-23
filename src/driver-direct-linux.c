@@ -71,8 +71,8 @@ os_count_boards (int vend_id)
     detected_dev_id = 0x0000FFFF & id;
     detected_base &= ~(0x01);	// bit 0 of base address is the IO/Mem bit and not part of the address
 
-    //printf("%s: dummy:%x id:%x name:%s detected_base:%x \n","sfdbg: srd/driver-direct-linux.c: os_count_boards()", dummy, id, name, detected_base);
-    //printf("%s: detected vid:pid: %x:%x \n","sfdbg: srd/driver-direct-linux.c: os_count_boards()", detected_vend_id, detected_dev_id);
+    printf("sfdbg: srd/driver-direct-linux.c: os_count_boards(): dummy:%x id:%x name:%s detected_base:%x \n", dummy, id, name, detected_base);
+    printf("sfdbg: srd/driver-direct-linux.c: os_count_boards(): detected vid:pid: %x:%x \n", detected_vend_id, detected_dev_id);
 
     if (detected_vend_id == vend_id) {
 			if (i >= MAX_NUM_BOARDS) {
