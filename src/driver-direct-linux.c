@@ -66,6 +66,9 @@ os_count_boards (int vend_id)
 		// ret = sscanf (buf, "%x %x %s %x ", &dummy, &id, name, &detected_base); 
 		// commented since ret is never used
     sscanf (buf, "%x %x %s %x ", &dummy, &id, name, &detected_base);
+
+    printf("sfdbg: srd/driver-direct-linux.c: os_count_boards(): unmasked detected_base:%x \n", detected_base);
+
       
     detected_vend_id = (0xFFFF0000 & id) >> 16;
     detected_dev_id = 0x0000FFFF & id;
