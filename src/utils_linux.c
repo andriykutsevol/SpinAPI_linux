@@ -38,11 +38,9 @@ int pci_get_resource0(int dev_id, char *resource0_path){
 
 
     fgets (number_s, 16, fd); 
-
-
     fclose(fd);
 
-    printf("nummber : %d", atoi(number_s));
+    printf("number_s: %s\n", number_s);
 
     // if (atoi(&number) != address)
     //   continue;    
