@@ -55,7 +55,7 @@ int pci_get_resource0(int dev_id, char *resource0_path){
 
   const char *pci_sysdir = "/sys/devices/pci0000:00";
 
-  listdir(pci_sysdir);
+  listdir(pci_sysdir, 4);
 
 
 
