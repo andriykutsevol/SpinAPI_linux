@@ -102,11 +102,11 @@ os_count_boards (int vend_id)
         printf("xxxxxxxxxxxxxxxxxx\n");
       }
 
-
       pci_resource0path_array = (char*)calloc(MAX_NUM_BOARDS * 512, sizeof(char));   //512 is the max length of path.
 
-      //pci_get_resource0(detected_dev_id);
-      //pci_resource0path_array[i] = 
+      pci_get_resource0(detected_dev_id, pci_resource0path_array[512*i]);
+
+      printf("pci_resource0path_array[512*i] = %s", pci_resource0path_array[512*i]); 
 
 			i++;
 		}
