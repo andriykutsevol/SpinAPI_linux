@@ -68,6 +68,18 @@ void find_resource0_listdir(const char *pci_sysdir, int dev_id, const char *top_
 
                 printf("path_to_pci_device: %s\n", path_to_pci_device);
 
+                char path_to_resource0[1024];
+
+                sscanf(&path_to_resource0, "%s/resource0", path_to_pci_device);
+
+                printf("path_to_resource0: %s", &path_to_resource0);
+
+                // if ( (fd = fopen(path, "r")) == NULL ){
+                //   return -1;
+                // }else{
+
+                // }
+
               }
             }
         }
