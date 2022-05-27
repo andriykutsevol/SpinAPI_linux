@@ -1,8 +1,7 @@
 #include "utils_linux.h"
-#include <stdio.h>
 
 void pci_get_resource0(int dev_id, char* resource0_path){
 
-  printf("pci_get_resource0\n");
+  //printf("pci_get_resource0\n");
 
 }
