@@ -87,11 +87,12 @@ char *strremove(char *str, const char *sub) {
 
 
 
-void find_resource0_listdir(const char *pci_sysdir, int dev_id)
+void find_resource0_listdir(const char *pci_sysdir, int dev_id, char *result)
 {
     DIR *dir;
     struct dirent *de;
     FILE* fd;
+    char *path_to_resource0;
 
     if (!(dir = opendir(pci_sysdir)))
         return;
@@ -104,8 +105,7 @@ void find_resource0_listdir(const char *pci_sysdir, int dev_id)
         snprintf(path, sizeof(path), "%s/%s", pci_sysdir, de->d_name);
 
         if (de->d_type == DT_DIR) {
-            //printf("%*s[%s]\n", indent, "", de->d_name);
-            find_resource0_listdir(path, dev_id);
+            find_resource0_listdir(path, dev_id, result);
 
         } else {
 
@@ -130,26 +130,20 @@ void find_resource0_listdir(const char *pci_sysdir, int dev_id)
 
                 printf("path_to_pci_device: %s\n", path_to_pci_device);
 
-                char *path_to_resource0 = concat(2, path_to_pci_device, "/resource0");
-
-
-                // char path_to_resource0[1024];
-                // strcat(path_to_resource0, path_to_pci_device);
-                // strcat(path_to_resource0, "/resource0");
+                path_to_resource0 = concat(2, path_to_pci_device, "/resource0");
 
                 printf("path_to_resource0: %s\n", path_to_resource0);
 
-                // if ( (fd = fopen(path, "r")) == NULL ){
-                //   return -1;
-                // }else{
+                stpcpy(result, path_to_resource0);
 
-                // }
+                closedir(dir);
+
+                return 0;
 
               }
             }
         }
     }
-    closedir(dir);
 }
 
 
@@ -158,48 +152,13 @@ void find_resource0_listdir(const char *pci_sysdir, int dev_id)
 
 
 
-int pci_get_resource0(int dev_id, char *resource0_path){
+int pci_get_resource0(int dev_id, char *result){
 
-  char *result = (char*) malloc(512+1 * sizeof(char));
-  
+
   //open /sys/devices/pci0000:00/ directory
   const char *pci_sysdir = "/sys/devices/pci0000:00";
 
-  find_resource0_listdir(pci_sysdir, dev_id);
-
-
-
-
-  // if ( !(dir = opendir(pci_sysdir))){
-  //     return 1;
-  // }
-
-  // while ( (de = readdir(dir)) ) {
-  //   printf("de->d_name: %s\n", de->d_name);
-
-  //   sprintf(path, "%s/%s/device", pci_sysdir, de->d_name); 
-
-  //   printf("path to device id file: %s \n", path);
-
-  //   if ( (fd = fopen(path, "r")) == NULL )
-  //     continue;  
-
-
-  //   fgets (number_s, 16, fd); 
-  //   fclose(fd);
-
-  //   sscanf(number_s, "%x", &number);
-
-  //   printf("number: %x, dev_id: %x\n", number, dev_id);
-  
-
-  //   printf("--------------------\n");    
-
-  // }
-
-  // closedir(dir);
-
-  // strcpy(resource0_path, "pci_get_resource0");
+  find_resource0_listdir(pci_sysdir, dev_id, result);
 
   return 0;
 
