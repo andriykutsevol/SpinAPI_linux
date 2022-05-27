@@ -28,7 +28,7 @@ void listdir(const char *pci_sysdir)
             listdir(path);
 
         } else {
-            if (de->d_name == "device"){
+            if (! strcmp(de->d_name, "device")){
 
               printf("FILE:%s\n", de->d_name);
               //sprintf(path, "%s/%s/device", pci_sysdir, de->d_name); 
