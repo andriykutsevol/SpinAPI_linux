@@ -25,8 +25,8 @@ void listdir(const char *name, int indent)
                 continue;
 
 
-            snprintf(path, sizeof(path), "%s/%s", name, entry->d_name);
-            printf("%*s[%s]\n", indent, "", entry->d_name);
+            snprintf(path, sizeof(path), "%s/%s", name, de->d_name);
+            printf("%*s[%s]\n", indent, "", de->d_name);
 
 
             listdir(path, indent + 2);
