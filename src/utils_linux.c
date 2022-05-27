@@ -32,8 +32,7 @@ void find_resource0_listdir(const char *pci_sysdir, int dev_id)
 
             if (! strcmp(de->d_name, "device")){
 
-              printf("path:%s\n", path);
-
+              //printf("path:%s\n", path);
               if ( (fd = fopen(path, "r")) == NULL )
                 continue; 
 
