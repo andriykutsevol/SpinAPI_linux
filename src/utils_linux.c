@@ -23,7 +23,7 @@ void listdir(const char *pci_sysdir)
             char path[1024];
             if (strcmp(de->d_name, ".") == 0 || strcmp(de->d_name, "..") == 0)
                 continue;
-            snprintf(path, sizeof(path), "%s/%s", name, de->d_name);
+            snprintf(path, sizeof(path), "%s/%s", pci_sysdir, de->d_name);
             //printf("%*s[%s]\n", indent, "", de->d_name);
             listdir(path);
 
@@ -31,7 +31,7 @@ void listdir(const char *pci_sysdir)
             printf("FILE:%s\n", de->d_name);
             if (de->d_name == "device"){
 
-              sprintf(path, "%s/%s/device", pci_sysdir, de->d_name); 
+              //sprintf(path, "%s/%s/device", pci_sysdir, de->d_name); 
 
 
             }
