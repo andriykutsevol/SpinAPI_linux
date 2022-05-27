@@ -97,7 +97,7 @@ os_count_boards (int vend_id)
 			dev_id_array[i] = detected_dev_id;
 
       if(pci_get_resource0){
-        prinf("zzzzzzzzzzzzzzzzzzz\n");
+        printf("zzzzzzzzzzzzzzzzzzz\n");
       }else{
         printf("xxxxxxxxxxxxxxxxxx\n");
       }
