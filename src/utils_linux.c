@@ -42,7 +42,7 @@ int pci_get_resource0(int dev_id, char *resource0_path){
 
     sscanf(number_s, "%x", &number);
 
-    printf("number: %x\n", number);
+    printf("number: %x, dev_id: %d\n", number, dev_id);
 
     // if (atoi(&number) != address)
     //   continue;    
