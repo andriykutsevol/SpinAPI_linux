@@ -8,6 +8,21 @@
 
 
 
+char *strremove(char *str, const char *sub) {
+    size_t len = strlen(sub);
+    if (len > 0) {
+        char *p = str;
+        size_t size = 0;
+        while ((p = strstr(p, sub)) != NULL) {
+            size = (size == 0) ? (p - str) + strlen(p + len) + 1 : size - len;
+            memmove(p, p + len, size - (p - str));
+        }
+    }
+    return str;
+}
+
+
+
 
 void find_resource0_listdir(const char *pci_sysdir, int dev_id, const char *top_path)
 {
@@ -48,7 +63,7 @@ void find_resource0_listdir(const char *pci_sysdir, int dev_id, const char *top_
               if (number == dev_id){
                 printf("number: %x, dev_id: %x\n", number, dev_id);
                 printf("path: %s, top_path: %s\n", path, top_path);
-                printf("basename: %s", basename(path));
+                printf("strremove: %s\n", strremove(path, "/device"));
               }
             }
         }
