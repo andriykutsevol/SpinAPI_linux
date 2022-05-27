@@ -63,7 +63,11 @@ void find_resource0_listdir(const char *pci_sysdir, int dev_id, const char *top_
               if (number == dev_id){
                 printf("number: %x, dev_id: %x\n", number, dev_id);
                 printf("path: %s, top_path: %s\n", path, top_path);
-                printf("strremove: %s\n", strremove(path, "/device"));
+                char *path_to_pci_device = NULL;
+                path_to_pci_device = strremove(path, "/device");
+
+                printf("path_to_pci_device: %s\n", path_to_pci_device);
+
               }
             }
         }
