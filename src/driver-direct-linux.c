@@ -47,7 +47,7 @@ os_count_boards (int vend_id)
   }
   
   printf("zzzzzzzzzzzzzzzzzzzzzzzzzzz\n");
-  pci_resource0path_array = (char*)malloc(MAX_NUM_BOARDS * 512 * sizeof(char));   //512 is the max length of path. 
+  pci_resource0path_array = (char*) malloc(MAX_NUM_BOARDS * (512 +1) * sizeof(char));   //512 is the max length of path.  (+1 is for null terminator)
 
    
 
@@ -107,8 +107,10 @@ os_count_boards (int vend_id)
 			base_addr_array[i] = detected_base;
 			dev_id_array[i] = detected_dev_id;
 
-      pci_get_resource0(detected_dev_id, &pci_resource0path_array[512*i]);
-      printf("pci_resource0path_array[512*i] = %s, i: %d\n", pci_resource0path_array[512*i], i); 
+      strcpy(pci_resource0path_array[512*i], "pci_get_resource0");
+
+      //pci_get_resource0(detected_dev_id, &pci_resource0path_array[512*i]);
+      //printf("pci_resource0path_array[512*i] = %s, i: %d\n", pci_resource0path_array[512*i], i); 
 
 			i++;
 		}
