@@ -96,7 +96,7 @@ os_count_boards (int vend_id)
 			base_addr_array[i] = detected_base;
 			dev_id_array[i] = detected_dev_id;
 
-      pci_resource0path_array = (char*)calloc(MAX_NUM_BOARDS * 512 *sizeof(char));   //512 is the max length of path.
+      pci_resource0path_array = (char*)calloc(MAX_NUM_BOARDS * 512, sizeof(char));   //512 is the max length of path.
 
       if(pci_get_resource0){
         printf("zzzzzzzzzzzzzzzzzzz\n");
