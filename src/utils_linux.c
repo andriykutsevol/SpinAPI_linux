@@ -8,7 +8,7 @@
 
 
 
-void listdir(const char *pci_sysdir, int dev_id)
+void find_resource0_listdir(char *pci_sysdir, int dev_id)
 {
     DIR *dir;
     struct dirent *de;
@@ -26,7 +26,7 @@ void listdir(const char *pci_sysdir, int dev_id)
 
         if (de->d_type == DT_DIR) {
             //printf("%*s[%s]\n", indent, "", de->d_name);
-            listdir(path);
+            find_resource0_listdir(path, dev_id);
 
         } else {
 
