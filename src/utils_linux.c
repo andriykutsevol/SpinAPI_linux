@@ -87,7 +87,7 @@ char *strremove(char *str, const char *sub) {
 
 
 
-void find_resource0_listdir(const char *pci_sysdir, int dev_id, const char *top_path)
+void find_resource0_listdir(const char *pci_sysdir, int dev_id)
 {
     DIR *dir;
     struct dirent *de;
@@ -105,7 +105,7 @@ void find_resource0_listdir(const char *pci_sysdir, int dev_id, const char *top_
 
         if (de->d_type == DT_DIR) {
             //printf("%*s[%s]\n", indent, "", de->d_name);
-            find_resource0_listdir(path, dev_id, pci_sysdir);
+            find_resource0_listdir(path, dev_id);
 
         } else {
 
@@ -125,7 +125,6 @@ void find_resource0_listdir(const char *pci_sysdir, int dev_id, const char *top_
 
               if (number == dev_id){
                 printf("number: %x, dev_id: %x\n", number, dev_id);
-                printf("path: %s, top_path: %s\n", path, top_path);
                 char *path_to_pci_device = NULL;
                 path_to_pci_device = strremove(path, "/device");
 
@@ -166,7 +165,7 @@ int pci_get_resource0(int dev_id, char *resource0_path){
   //open /sys/devices/pci0000:00/ directory
   const char *pci_sysdir = "/sys/devices/pci0000:00";
 
-  find_resource0_listdir(pci_sysdir, dev_id, pci_sysdir);
+  find_resource0_listdir(pci_sysdir, dev_id);
 
 
 
