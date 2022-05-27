@@ -18,18 +18,18 @@ void listdir(const char *pci_sysdir)
 
     while ((de = readdir(dir)) != NULL) {
 
-        if (de->d_type == DT_DIR) {
+        char path[1024];
+        if (strcmp(de->d_name, ".") == 0 || strcmp(de->d_name, "..") == 0)
+            continue;
+        snprintf(path, sizeof(path), "%s/%s", pci_sysdir, de->d_name);
 
-            char path[1024];
-            if (strcmp(de->d_name, ".") == 0 || strcmp(de->d_name, "..") == 0)
-                continue;
-            snprintf(path, sizeof(path), "%s/%s", pci_sysdir, de->d_name);
+        if (de->d_type == DT_DIR) {
             //printf("%*s[%s]\n", indent, "", de->d_name);
             listdir(path);
 
         } else {
             if (! strcmp(de->d_name, "device")){
-
+              printf("path:%s\n", path);
               printf("FILE:%s\n", de->d_name);
               //sprintf(path, "%s/%s/device", pci_sysdir, de->d_name); 
 
