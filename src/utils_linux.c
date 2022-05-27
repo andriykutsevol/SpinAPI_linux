@@ -28,7 +28,7 @@ void listdir(const char *name, int indent)
             listdir(path, indent + 2);
 
         } else {
-            printf("FILE:%*s\n", de->d_name);
+            printf("FILE:%*s\n", &de->d_name);
         }
     }
     closedir(dir);
