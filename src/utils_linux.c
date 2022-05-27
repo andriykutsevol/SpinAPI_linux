@@ -1,6 +1,6 @@
 #include "utils_linux.h"
 
-void pci_get_resource0(const *char dev_id, const *char path_to_resource0){
+void pci_get_resource0(){
 
   printf("pci_get_resource0");
 
