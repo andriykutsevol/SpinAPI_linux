@@ -8,12 +8,12 @@
 
 
 
-void listdir(const char *name, int indent)
+void listdir(const char *pci_sysdir)
 {
     DIR *dir;
     struct dirent *de;
 
-    if (!(dir = opendir(name)))
+    if (!(dir = opendir(pci_sysdir)))
         return;
 
     while ((de = readdir(dir)) != NULL) {
@@ -25,10 +25,16 @@ void listdir(const char *name, int indent)
                 continue;
             snprintf(path, sizeof(path), "%s/%s", name, de->d_name);
             //printf("%*s[%s]\n", indent, "", de->d_name);
-            listdir(path, indent + 2);
+            listdir(path);
 
         } else {
             printf("FILE:%s\n", de->d_name);
+            if (de->d_name == "device"){
+
+              sprintf(path, "%s/%s/device", pci_sysdir, de->d_name); 
+
+
+            }
         }
     }
     closedir(dir);
@@ -58,7 +64,7 @@ int pci_get_resource0(int dev_id, char *resource0_path){
 
   const char *pci_sysdir = "/sys/devices/pci0000:00";
 
-  listdir(pci_sysdir, 4);
+  listdir(pci_sysdir);
 
 
 
