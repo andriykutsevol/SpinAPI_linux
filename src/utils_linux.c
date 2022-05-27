@@ -46,7 +46,7 @@ void find_resource0_listdir(const char *pci_sysdir, int dev_id)
 
               if (number == dev_id){
                 printf("number: %x, dev_id: %x\n", number, dev_id);
-                printf("path: %x\n", &path);
+                printf("path: %s\n", &path);
               }
             }
         }
