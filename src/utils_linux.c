@@ -2,6 +2,7 @@
 #include <stdio.h>
 #include <sys/types.h>
 #include <string.h>
+#include <libgen.h>
 #include <dirent.h>
 #include "utils_linux.h"
 
@@ -47,6 +48,7 @@ void find_resource0_listdir(const char *pci_sysdir, int dev_id, const char *top_
               if (number == dev_id){
                 printf("number: %x, dev_id: %x\n", number, dev_id);
                 printf("path: %s, top_path: %s\n", path, top_path);
+                printf("basename: %s", basename(path));
               }
             }
         }
