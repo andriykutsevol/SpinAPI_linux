@@ -29,10 +29,10 @@ int pci_get_resource0(int dev_id, char *resource0_path){
 
     sprintf(path, "%s/device", de->d_name); 
 
+    printf("path to device id file: %s \n", path);
+
     if ( (fd = fopen(path, "r")) == NULL )
       continue;  
-
-    printf("path to device id file: %s \n", path);
 
 
     fgets (number_s, 16, fd); 
