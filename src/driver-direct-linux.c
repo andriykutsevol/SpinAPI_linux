@@ -20,14 +20,6 @@ static int my_getline (char **lineptr, size_t * n, FILE * stream);
 static int num_cards = -1;
 
 
-void pci_get_resource0(const *char dev_id, const *char path_to_resource0){
-
-  printf("pci_get_resource0");
-
-}
-
-
-
 /**
  * This function returns the number of boards with a given vendor id.
  *
