@@ -1,3 +1,4 @@
+#include <stdlib.h>
 #include <stdio.h>
 #include <string.h>
 #include <dirent.h>
@@ -5,7 +6,7 @@
 
 int pci_get_resource0(int dev_id, char *resource0_path){
 
-  char *result = (char*) malloc(512+1, sizeof(char));
+  char *result = (char*) malloc(512+1 * sizeof(char));
   
   //open /sys/devices/pci0000:00/ directory
   
