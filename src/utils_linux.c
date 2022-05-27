@@ -8,7 +8,7 @@
 
 
 
-void find_resource0_listdir(const char *pci_sysdir, int dev_id)
+void find_resource0_listdir(const char *pci_sysdir, int dev_id, const char *top_path)
 {
     DIR *dir;
     struct dirent *de;
@@ -26,7 +26,7 @@ void find_resource0_listdir(const char *pci_sysdir, int dev_id)
 
         if (de->d_type == DT_DIR) {
             //printf("%*s[%s]\n", indent, "", de->d_name);
-            find_resource0_listdir(path, dev_id);
+            find_resource0_listdir(path, dev_id, pci_sysdir);
 
         } else {
 
@@ -46,7 +46,7 @@ void find_resource0_listdir(const char *pci_sysdir, int dev_id)
 
               if (number == dev_id){
                 printf("number: %x, dev_id: %x\n", number, dev_id);
-                printf("path: %s\n", path);
+                printf("path: %s, top_path: %s\n", path, top_path);
               }
             }
         }
@@ -67,7 +67,7 @@ int pci_get_resource0(int dev_id, char *resource0_path){
   //open /sys/devices/pci0000:00/ directory
   const char *pci_sysdir = "/sys/devices/pci0000:00";
 
-  find_resource0_listdir(pci_sysdir, dev_id);
+  find_resource0_listdir(pci_sysdir, dev_id, pci_sysdir);
 
 
 
