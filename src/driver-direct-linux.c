@@ -41,6 +41,17 @@ os_count_boards (int vend_id)
   size = 1000;
 
 
+  if(pci_resource0path_array){
+    printf("fffffffffffffffffffffffff");
+    free(pci_resource0path_array);
+  }else{
+    printf("zzzzzzzzzzzzzzzzzzzzzzzzzzz");
+    pci_resource0path_array = (char*)calloc(MAX_NUM_BOARDS * 512, sizeof(char));   //512 is the max length of path. 
+  }
+
+   
+
+
   buf = (char *) malloc (sizeof (char) * size);
   if (!buf) {
     debug (DEBUG_ERROR, "os_count_boards: Internal error: failed to allocate buffer.");
@@ -96,17 +107,8 @@ os_count_boards (int vend_id)
 			base_addr_array[i] = detected_base;
 			dev_id_array[i] = detected_dev_id;
 
-      if(pci_resource0path_array){
-        printf("zzzzzzzzzzzzzzzzzzz\n");
-      }else{
-        printf("xxxxxxxxxxxxxxxxxx\n");
-      }
-
-      pci_resource0path_array = (char*)calloc(MAX_NUM_BOARDS * 512, sizeof(char));   //512 is the max length of path.
-
       pci_get_resource0(detected_dev_id, pci_resource0path_array[512*i]);
-
-      printf("pci_resource0path_array[512*i] = %s", pci_resource0path_array[512*i]); 
+      printf("pci_resource0path_array[512*i] = %s\n", pci_resource0path_array[512*i]); 
 
 			i++;
 		}
