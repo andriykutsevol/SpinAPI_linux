@@ -42,12 +42,12 @@ os_count_boards (int vend_id)
 
 
   if(pci_resource0path_array){
-    printf("fffffffffffffffffffffffff");
+    printf("fffffffffffffffffffffffff\n");
     free(pci_resource0path_array);
-  }else{
-    printf("zzzzzzzzzzzzzzzzzzzzzzzzzzz");
-    pci_resource0path_array = (char*)calloc(MAX_NUM_BOARDS * 512, sizeof(char));   //512 is the max length of path. 
   }
+  
+  printf("zzzzzzzzzzzzzzzzzzzzzzzzzzz\n");
+  pci_resource0path_array = (char*)calloc(MAX_NUM_BOARDS * 512, sizeof(char));   //512 is the max length of path. 
 
    
 
