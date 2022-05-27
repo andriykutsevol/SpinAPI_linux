@@ -11,6 +11,7 @@
 #include "driver-os.h"
 #include "debug.h"
 #include "util.h"
+#include "utils_linux.h"
 
 #define MAX_NUM_BOARDS 32
 
@@ -243,6 +244,8 @@ os_inw (int card_num, unsigned int address)
 
   printf("sfdbg: src/driver-direct-linux.c: card_num: %d: base_addr_array[card_num]: %x, address: %x \n", card_num, base_addr_array[card_num], address);
   printf("sfdbg: src/driver-direct-linux.c: base_addr_array[card_num] + address: %u \n", base_addr_array[card_num] + address);
+
+  pci_get_resource0("dev_id", "result");
 
   return inl_p (base_addr_array[card_num] + address);
 }
