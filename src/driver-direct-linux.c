@@ -17,6 +17,7 @@
 
 static int dev_id_array[MAX_NUM_BOARDS];
 static int base_addr_array[MAX_NUM_BOARDS];
+static char* pci_resource0path_array;
 static int my_getline (char **lineptr, size_t * n, FILE * stream);
 static int num_cards = -1;
 
@@ -94,6 +95,15 @@ os_count_boards (int vend_id)
 
 			base_addr_array[i] = detected_base;
 			dev_id_array[i] = detected_dev_id;
+
+      if(pci_get_resource0){
+        prinf("zzzzzzzzzzzzzzzzzzz\n");
+      }else{
+        printf("xxxxxxxxxxxxxxxxxx\n");
+      }
+
+      //pci_get_resource0(detected_dev_id);
+      //pci_resource0path_array[i] = 
 
 			i++;
 		}
@@ -245,7 +255,6 @@ os_inw (int card_num, unsigned int address)
   printf("sfdbg: src/driver-direct-linux.c: card_num: %d: base_addr_array[card_num]: %x, address: %x \n", card_num, base_addr_array[card_num], address);
   printf("sfdbg: src/driver-direct-linux.c: base_addr_array[card_num] + address: %u \n", base_addr_array[card_num] + address);
 
-  pci_get_resource0();
 
   return inl_p (base_addr_array[card_num] + address);
 }
