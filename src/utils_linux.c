@@ -11,21 +11,28 @@
 void listdir(const char *name, int indent)
 {
     DIR *dir;
-    struct dirent *entry;
+    struct dirent *de;
 
     if (!(dir = opendir(name)))
         return;
 
-    while ((entry = readdir(dir)) != NULL) {
-        if (entry->d_type == DT_DIR) {
+    while ((de = readdir(dir)) != NULL) {
+
+        if (de->d_type == DT_DIR) {
+
             char path[1024];
-            if (strcmp(entry->d_name, ".") == 0 || strcmp(entry->d_name, "..") == 0)
+            if (strcmp(de->d_name, ".") == 0 || strcmp(de->d_name, "..") == 0)
                 continue;
-            snprintf(path, sizeof(path), "%s/%s", name, entry->d_name);
-            printf("%*s[%s]\n", indent, "", entry->d_name);
+
+
+            // snprintf(path, sizeof(path), "%s/%s", name, entry->d_name);
+            // printf("%*s[%s]\n", indent, "", entry->d_name);
+
+
             listdir(path, indent + 2);
+
         } else {
-            printf("%*s- %s\n", indent, "", entry->d_name);
+            printf("FILE:%*s- %s\n", indent, "", de->d_name);
         }
     }
     closedir(dir);
