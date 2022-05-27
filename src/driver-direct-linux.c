@@ -47,7 +47,7 @@ os_count_boards (int vend_id)
   }
   
   printf("zzzzzzzzzzzzzzzzzzzzzzzzzzz\n");
-  pci_resource0path_array = (char*)calloc(MAX_NUM_BOARDS * 512, sizeof(char));   //512 is the max length of path. 
+  pci_resource0path_array = (char*)malloc(MAX_NUM_BOARDS * 512 * sizeof(char));   //512 is the max length of path. 
 
    
 
