@@ -99,7 +99,7 @@ void find_resource0_listdir(const char *pci_sysdir, int dev_id, char *result)
 
     while ((de = readdir(dir)) != NULL) {
 
-        char path[1024];
+        char path[512];
         if (strcmp(de->d_name, ".") == 0 || strcmp(de->d_name, "..") == 0)
             continue;
         snprintf(path, sizeof(path), "%s/%s", pci_sysdir, de->d_name);
@@ -138,12 +138,10 @@ void find_resource0_listdir(const char *pci_sysdir, int dev_id, char *result)
 
                 closedir(dir);
 
-                return 0;
-
               }
             }
         }
-    }
+    }  
 }
 
 
