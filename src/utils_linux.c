@@ -23,16 +23,12 @@ void listdir(const char *name, int indent)
             char path[1024];
             if (strcmp(de->d_name, ".") == 0 || strcmp(de->d_name, "..") == 0)
                 continue;
-
-
             snprintf(path, sizeof(path), "%s/%s", name, de->d_name);
-            printf("%*s[%s]\n", indent, "", de->d_name);
-
-
+            //printf("%*s[%s]\n", indent, "", de->d_name);
             listdir(path, indent + 2);
 
         } else {
-            printf("FILE:%*s- %s\n", indent, "", de->d_name);
+            printf("FILE:%*s\n", de->d_name);
         }
     }
     closedir(dir);
