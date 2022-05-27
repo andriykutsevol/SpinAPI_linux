@@ -20,7 +20,9 @@ int pci_get_resource0(int dev_id, char *resource0_path){
   int number = 0;
   char number_s[16];
 
-  if ( !(dir = opendir("/sys/devices/pci0000:00/"))){
+  char *pci_sysdir = "/sys/devices/pci0000:00/";
+
+  if ( !(dir = opendir(pci_sysdir))){
       return 1;
   }
 
