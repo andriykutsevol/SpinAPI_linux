@@ -215,7 +215,7 @@ int pci_get_firmwareid(const char *resource0_path, int address, int *fw_result){
 
     printf("read_result: %lX\n", read_result);
 
-    *fw_result = 1234;
+    *fw_result = (int)read_result;
 
     // target_base = target & ~(sysconf(_SC_PAGE_SIZE)-1);
     // if (target + items_count*type_width - target_base > map_size)
