@@ -7,6 +7,9 @@
 #include <dirent.h>
 #include "debug.h"
 #include <sys/mman.h>
+#include <ctype.h>
+#include <stdint.h>
+#include <unistd.h>
 #include "utils_linux.h"
 
 
@@ -170,23 +173,53 @@ int pci_get_resource0(int dev_id, char *result){
 
 int pci_get_firmwareid(const char *resource0_path, int address, int *fw_result){
 
+
+    // sudo ./pcimem /sys/devices/pci0000:00/0000:00:02.5/0000:06:00.0/resource0 0x3c w 0x00
+
+    //void *mmap(void *addr, size_t length, int prot, int flags, int fd, off_t offset);
     //mmap(0, 4096, 0x3, 0x1, 3, 0x3c)
+    // 
 
     int fd;
     void *map_base, *virt_addr;
+    int type_width;
     off_t target, target_base;
+    int map_size = 4096UL;
+    int items_count = 1;
 
-    target = (long)address;
-    printf("target: %d", target);
+    uint64_t read_result;
+
+    target = (off_t)address;
+    type_width = 4;
+    
+    target_base = target & ~(sysconf(_SC_PAGE_SIZE)-1);
+    if (target + items_count*type_width - target_base > map_size)
+        map_size = target + items_count*type_width - target_base;
 
     if((fd = open(resource0_path, O_RDWR | O_SYNC)) == -1){
-        debug (DEBUG_ERROR, "pci_get_resource0(): Cannot get resource0 for the device");
+        debug (DEBUG_ERROR, "pci_get_firmwareid(): Cannot get resource0 for the device");
         return -1;
     }
 
+    map_base = mmap(0, map_size, PROT_READ | PROT_WRITE, MAP_SHARED, fd, target_base);
+
+    if(map_base == (void *) -1){
+       debug (DEBUG_ERROR, "pci_get_firmwareid(): Cannot mmap"); 
+    }
+
+    virt_addr = map_base + target - target_base;
+
+    read_result = *((uint32_t *) virt_addr);
+
+    printf("read_result: 0x%0*lX\n", read_result);
+
     *fw_result = 1234;
 
-    //map_base = mmap(0, map_size, PROT_READ | PROT_WRITE, MAP_SHARED, fd, target_base);
+    // target_base = target & ~(sysconf(_SC_PAGE_SIZE)-1);
+    // if (target + items_count*type_width - target_base > map_size)
+	    // map_size = target + items_count*type_width - target_base;
+
+    // map_base = mmap(0, map_size, PROT_READ | PROT_WRITE, MAP_SHARED, fd, target_base);
 
 
     return 0;
