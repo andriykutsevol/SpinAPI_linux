@@ -127,7 +127,7 @@ int find_resource0_listdir(const char *name, int dev_id, char *result)
 
               if (number == dev_id){
                     char *path_to_pci_device = NULL;
-                    path_to_pci_device = strremove(path, "/device");
+                    //path_to_pci_device = strremove(path, "/device");
                     path_to_resource0 = concat(2, path_to_pci_device, "/resource0");
                     stpcpy(result, path_to_resource0);
                     closedir(dir);
