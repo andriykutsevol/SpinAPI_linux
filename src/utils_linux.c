@@ -4,6 +4,7 @@
 #include <string.h>
 #include <libgen.h>
 #include <dirent.h>
+#include "debug.h"
 #include "utils_linux.h"
 
 
@@ -144,21 +145,20 @@ int find_resource0_listdir(const char *name, int dev_id, char *result)
 
 
 
-
 int pci_get_resource0(int dev_id, char *result){
 
-  const char *pci_sysdir = "/sys/devices/pci0000:00";
-  find_resource0_listdir(pci_sysdir, dev_id, result);
+    const char *pci_sysdir = "/sys/devices/pci0000:00";
+    find_resource0_listdir(pci_sysdir, dev_id, result);
 
     FILE *file;
     if ((file = fopen(result, "r")))
     {
-        printf("file exists");
+        debug (DEBUG_INFO, "pci_get_resource0() successful.");
         fclose(file);
+        return 0;
     }else{
-        printf("file does not exists");
+        debug (DEBUG_ERROR, "pci_get_resource0(): Cannot get resource0 for the device");
+        return -1;
     }  
-
-  return 0;
 
 }
