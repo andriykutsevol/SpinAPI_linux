@@ -263,7 +263,7 @@ os_inw (int card_num, unsigned int address)
 
   printf("fw_result: %d\n", fw_result);
 
-  return 0;         // Temporary.
+  return fw_result;         // Temporary.
   //return inl_p (base_addr_array[card_num] + address);
 }
 
