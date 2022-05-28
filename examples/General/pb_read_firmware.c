@@ -48,7 +48,7 @@ int main(int argc, char **argv)
 
 	for (i = 0; i < numBoards; i++) {
 
-		printf("%s: select board:%d\n", "sfdbg: examples/General/pb_read_firmware.c: pb_count_boards():", i);
+		//printf("%s: select board:%d\n", "sfdbg: examples/General/pb_read_firmware.c: pb_count_boards():", i);
 
 		pb_select_board(i);	/* Select the ith board */
 
