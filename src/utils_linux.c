@@ -1,6 +1,7 @@
 #include <stdlib.h>
 #include <stdio.h>
 #include <sys/types.h>
+#include <fcntl.h>
 #include <string.h>
 #include <libgen.h>
 #include <dirent.h>
@@ -161,4 +162,23 @@ int pci_get_resource0(int dev_id, char *result){
         return -1;
     }  
 
+}
+
+
+
+
+int pci_get_firmwareid(const char *resource0_path, int address, int *fw_result){
+
+    //mmap(0, 4096, 0x3, 0x1, 3, 0x3c)
+
+    int fd;
+
+    if((fd = open(resource0_path, O_RDWR | O_SYNC)) == -1){
+        debug (DEBUG_ERROR, "pci_get_resource0(): Cannot get resource0 for the device");
+        return -1;
+    }
+
+    *fw_result = 1234;
+
+    return 0;
 }
