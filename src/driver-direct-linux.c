@@ -105,7 +105,6 @@ os_count_boards (int vend_id)
 			dev_id_array[i] = detected_dev_id;
 
       pci_get_resource0(detected_dev_id, &pci_resource0path_array[512*i]);
-      printf("pci_resource0path_array[512*i] = %s, i: %d\n", &pci_resource0path_array[512*i], i); 
 
 			i++;
 		}
@@ -257,8 +256,11 @@ os_inw (int card_num, unsigned int address)
   //printf("sfdbg: src/driver-direct-linux.c: card_num: %d: base_addr_array[card_num]: %x, address: %x \n", card_num, base_addr_array[card_num], address);
   //printf("sfdbg: src/driver-direct-linux.c: base_addr_array[card_num] + address: %u \n", base_addr_array[card_num] + address);
 
+  printf("pci_resource0path_array[512*i] = %s, card_num: %d\n", &pci_resource0path_array[512*card_num], card_num); 
 
-  return inl_p (base_addr_array[card_num] + address);
+
+  return 0;         // Temporary.
+  //return inl_p (base_addr_array[card_num] + address);
 }
 
 int
