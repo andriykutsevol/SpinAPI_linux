@@ -127,8 +127,6 @@ int find_resource0_listdir(const char *name, int dev_id, char *result)
 
               if (number == dev_id){
                     char *path_to_pci_device = NULL;
-                    //path_to_pci_device = strremove(path, "/device");
-                    //path_to_resource0 = concat(2, path_to_pci_device, "/resource0");
                     path_to_resource0 = concat(2, path, "/resource0");
                     path_to_resource0 = strremove(path_to_resource0, "/device/resource0");
                     path_to_resource0 = concat(2, path_to_resource0, "/resource0");
@@ -147,16 +145,19 @@ int find_resource0_listdir(const char *name, int dev_id, char *result)
 
 
 
-
-
-
 int pci_get_resource0(int dev_id, char *result){
 
-
-  //open /sys/devices/pci0000:00/ directory
   const char *pci_sysdir = "/sys/devices/pci0000:00";
-
   find_resource0_listdir(pci_sysdir, dev_id, result);
+
+    FILE *file;
+    if ((file = fopen(result, "r")))
+    {
+        printf("file exists");
+        fclose(file);
+    }else{
+        printf("file does not exists");
+    }  
 
   return 0;
 
