@@ -97,8 +97,8 @@ os_count_boards (int vend_id)
 			  detected_dev_id, 
 			  detected_base);
 
-      printf("sfdbg: srd/driver-direct-linux.c: os_count_boards(): dummy:%x id:%x name:%s detected_base:%x \n", dummy, id, name, detected_base);
-      printf("sfdbg: srd/driver-direct-linux.c: os_count_boards(): detected vid:pid: %x:%x \n", detected_vend_id, detected_dev_id);
+      //printf("sfdbg: srd/driver-direct-linux.c: os_count_boards(): dummy:%x id:%x name:%s detected_base:%x \n", dummy, id, name, detected_base);
+      //printf("sfdbg: srd/driver-direct-linux.c: os_count_boards(): detected vid:pid: %x:%x \n", detected_vend_id, detected_dev_id);
 
 
 			base_addr_array[i] = detected_base;
