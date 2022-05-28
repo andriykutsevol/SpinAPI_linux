@@ -213,7 +213,7 @@ int pci_get_firmwareid(const char *resource0_path, int address, int *fw_result){
 
     printf("Value at offset 0x%X (%p): 0x%0*lX\n", (int) target + 0*type_width, virt_addr, type_width*2, read_result);
 
-    printf("read_result: %x", read_result);
+    printf("read_result: %lX\n", read_result);
 
     *fw_result = 1234;
 
