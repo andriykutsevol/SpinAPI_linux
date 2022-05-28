@@ -261,7 +261,7 @@ os_inw (int card_num, unsigned int address)
   int fw_result = 0;
   pci_get_firmwareid(&pci_resource0path_array[512*card_num], address, &fw_result);
 
-  printf("fw_result: %d", fw_result);
+  printf("fw_result: %d\n", fw_result);
 
   return 0;         // Temporary.
   //return inl_p (base_addr_array[card_num] + address);

@@ -6,6 +6,7 @@
 #include <libgen.h>
 #include <dirent.h>
 #include "debug.h"
+#include <sys/mman.h>
 #include "utils_linux.h"
 
 
@@ -172,6 +173,11 @@ int pci_get_firmwareid(const char *resource0_path, int address, int *fw_result){
     //mmap(0, 4096, 0x3, 0x1, 3, 0x3c)
 
     int fd;
+    void *map_base, *virt_addr;
+    off_t target, target_base;
+
+    target = (unsigned long)address;
+    printf("target: %d", target);
 
     if((fd = open(resource0_path, O_RDWR | O_SYNC)) == -1){
         debug (DEBUG_ERROR, "pci_get_resource0(): Cannot get resource0 for the device");
@@ -179,6 +185,9 @@ int pci_get_firmwareid(const char *resource0_path, int address, int *fw_result){
     }
 
     *fw_result = 1234;
+
+    //map_base = mmap(0, map_size, PROT_READ | PROT_WRITE, MAP_SHARED, fd, target_base);
+
 
     return 0;
 }
