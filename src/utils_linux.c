@@ -176,7 +176,7 @@ int pci_get_firmwareid(const char *resource0_path, int address, int *fw_result){
     void *map_base, *virt_addr;
     off_t target, target_base;
 
-    target = (unsigned long)address;
+    target = (long)address;
     printf("target: %d", target);
 
     if((fd = open(resource0_path, O_RDWR | O_SYNC)) == -1){
