@@ -87,61 +87,58 @@ char *strremove(char *str, const char *sub) {
 
 
 
-void find_resource0_listdir(const char *pci_sysdir, int dev_id, char *result)
+int find_resource0_listdir(const char *name, int dev_id, char *result)
 {
     DIR *dir;
     struct dirent *de;
     FILE* fd;
     char *path_to_resource0;
 
-    if (!(dir = opendir(pci_sysdir)))
-        return;
+    if (!(dir = opendir(name)))
+        return 2;
 
     while ((de = readdir(dir)) != NULL) {
 
-        char path[512];
+        char path[1024];
         if (strcmp(de->d_name, ".") == 0 || strcmp(de->d_name, "..") == 0)
             continue;
-        snprintf(path, sizeof(path), "%s/%s", pci_sysdir, de->d_name);
+        snprintf(path, sizeof(path), "%s/%s", name, de->d_name);
 
         if (de->d_type == DT_DIR) {
-            find_resource0_listdir(path, dev_id, result);
+
+            int res = find_resource0_listdir(path, dev_id, result);
+            if (res == 0){
+                return 0;
+            }
 
         } else {
 
             if (! strcmp(de->d_name, "device")){
 
-              //printf("path:%s\n", path);
               if ( (fd = fopen(path, "r")) == NULL )
-                continue; 
+                continue;  
 
               char number_s[16];
               int number;
-
               fgets (number_s, 16, fd);
               fclose(fd);
 
               sscanf(number_s, "%x", &number);
 
               if (number == dev_id){
-                printf("number: %x, dev_id: %x\n", number, dev_id);
-                char *path_to_pci_device = NULL;
-                path_to_pci_device = strremove(path, "/device");
-
-                printf("path_to_pci_device: %s\n", path_to_pci_device);
-
-                path_to_resource0 = concat(2, path_to_pci_device, "/resource0");
-
-                printf("path_to_resource0: %s\n", path_to_resource0);
-
-                stpcpy(result, path_to_resource0);
-
-                closedir(dir);
-
+                    char *path_to_pci_device = NULL;
+                    path_to_pci_device = strremove(path, "/device");
+                    path_to_resource0 = concat(2, path_to_pci_device, "/resource0");
+                    stpcpy(result, path_to_resource0);
+                    closedir(dir);
+                    return 0;
               }
+
             }
         }
-    }  
+    }
+    closedir(dir);
+    return 1;
 }
 
 
