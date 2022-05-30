@@ -16,6 +16,7 @@
 
 static int dev_id_array[MAX_NUM_BOARDS];
 static int base_addr_array[MAX_NUM_BOARDS];
+static char* pci_resource0path_array = NULL;
 static int my_getline (char **lineptr, size_t * n, FILE * stream);
 static int num_cards = -1;
 
@@ -37,6 +38,11 @@ os_count_boards (int vend_id)
 
   size = 1000;
 
+  if(pci_resource0path_array){
+    free(pci_resource0path_array);
+  }
+  //512 is the max length of path.  (+1 is for null terminator)
+  pci_resource0path_array = (char*) malloc(MAX_NUM_BOARDS * (512 +1) * sizeof(char));
 
   buf = (char *) malloc (sizeof (char) * size);
   if (!buf) {
@@ -85,6 +91,8 @@ os_count_boards (int vend_id)
 
 			base_addr_array[i] = detected_base;
 			dev_id_array[i] = detected_dev_id;
+
+      pci_get_resource0(detected_dev_id, &pci_resource0path_array[512*i]);
 
 			i++;
 		}
@@ -221,7 +229,12 @@ os_inw (int card_num, unsigned int address)
     return -1;
   }
 
-  return inl_p (base_addr_array[card_num] + address);
+
+  int fw_result = 0;
+  pcie_get_firmwareid(&pci_resource0path_array[512*card_num], address, &fw_result);
+
+  return fw_result;         // Temporary.
+  //return inl_p (base_addr_array[card_num] + address);
 }
 
 int
