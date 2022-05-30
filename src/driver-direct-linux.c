@@ -39,6 +39,8 @@ os_count_boards (int vend_id)
 
   size = 1000;
 
+  // We clean up the memory because is function
+  // is called sereval times during initialization
   if(pci_resource0path_array){
     free(pci_resource0path_array);
   }
@@ -94,6 +96,9 @@ os_count_boards (int vend_id)
 			base_addr_array[i] = detected_base;
 			dev_id_array[i] = detected_dev_id;
 
+      // We are trying to get the "resource0" for every card.
+      // If it is not a PCI card it will not find anything.
+      // Later we will use this output for cards that for sure has a PCIe interface.
       pci_get_resource0(detected_dev_id, &pci_resource0path_array[512*i]);
 
 			i++;
