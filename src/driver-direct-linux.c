@@ -231,13 +231,18 @@ os_inw (int card_num, unsigned int address)
     return -1;
   }
 
+  // At this place, we have to define all
+  // the cards that should be accessed with mmap.
+  if(dev_id_array[card_num] == 34938){
 
-  printf("zzzzzzzzzzzzzz: %x\n",dev_id_array[card_num]);
+    int fw_result = 0;
+    pcie_get_firmwareid(&pci_resource0path_array[512*card_num], address, &fw_result);
+    return fw_result;         // Temporary.
 
-  int fw_result = 0;
-  pcie_get_firmwareid(&pci_resource0path_array[512*card_num], address, &fw_result);
-  return fw_result;         // Temporary.
-  //return inl_p (base_addr_array[card_num] + address);
+  }else{
+    return inl_p (base_addr_array[card_num] + address);
+  }
+
 }
 
 int
