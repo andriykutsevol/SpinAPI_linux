@@ -89,7 +89,7 @@ os_count_boards (int vend_id)
 	      return -1;
 			}
 
-			debug (DEBUG_ERROR, "os_count_boards: Found dev_id 0x%x, base_address 0x%x\n", 
+			debug (DEBUG_INFO, "os_count_boards: Found dev_id 0x%x, base_address 0x%x\n", 
 			  detected_dev_id, 
 			  detected_base);
 
@@ -153,7 +153,7 @@ os_init (int card_num)
     }
   else
     {
-      debug (DEBUG_ERROR, "os_init: iopl() successful.");
+      debug (DEBUG_INFO, "os_init: iopl() successful.");
     }
 
   return dev_id_array[card_num];
