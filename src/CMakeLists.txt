@@ -11,7 +11,7 @@ if(WIN32)
     caps.c debug.c driver-usb-windows.c if.c io.c spinapi.c usb.c util.c)
 elseif(LINUX)
   set(SPINAPI_SRC
-    caps.c debug.c spinapi.c driver-direct-linux.c driver-usb-linux.c if.c usb.c util.c)
+    caps.c debug.c spinapi.c driver-direct-linux.c driver-usb-linux.c if.c usb.c util.c utils_linux.c)
 endif()
 
 add_definitions(-DVER_STRING_API="${VER_STRING_API}")
