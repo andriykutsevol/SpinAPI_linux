@@ -43,7 +43,8 @@ os_count_boards (int vend_id)
     free(pci_resource0path_array);
   }
   //512 is the max length of path.  (+1 is for null terminator)
-  pci_resource0path_array = (char*) malloc(MAX_NUM_BOARDS * (512 +1) * sizeof(char));
+  pci_resource0path_array = (char*) malloc(MAX_NUM_BOARDS * (512 +1) * sizeof(char)); 
+
 
   buf = (char *) malloc (sizeof (char) * size);
   if (!buf) {
@@ -231,9 +232,10 @@ os_inw (int card_num, unsigned int address)
   }
 
 
+  printf("zzzzzzzzzzzzzz: %d\n",dev_id_array[card_num]);
+
   int fw_result = 0;
   pcie_get_firmwareid(&pci_resource0path_array[512*card_num], address, &fw_result);
-
   return fw_result;         // Temporary.
   //return inl_p (base_addr_array[card_num] + address);
 }
