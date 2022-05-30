@@ -232,7 +232,7 @@ os_inw (int card_num, unsigned int address)
   }
 
 
-  printf("zzzzzzzzzzzzzz: %d\n",dev_id_array[card_num]);
+  printf("zzzzzzzzzzzzzz: %x\n",dev_id_array[card_num]);
 
   int fw_result = 0;
   pcie_get_firmwareid(&pci_resource0path_array[512*card_num], address, &fw_result);
