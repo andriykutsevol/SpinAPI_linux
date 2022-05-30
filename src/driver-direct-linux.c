@@ -259,7 +259,7 @@ os_inw (int card_num, unsigned int address)
   printf("pci_resource0path_array[512*i] = %s, card_num: %d\n", &pci_resource0path_array[512*card_num], card_num); 
 
   int fw_result = 0;
-  pci_get_firmwareid(&pci_resource0path_array[512*card_num], address, &fw_result);
+  pcie_get_firmwareid(&pci_resource0path_array[512*card_num], address, &fw_result);
 
   printf("fw_result: %d\n", fw_result);
 

@@ -171,7 +171,7 @@ int pci_get_resource0(int dev_id, char *result){
 
 
 
-int pci_get_firmwareid(const char *resource0_path, int address, int *fw_result){
+int pcie_get_firmwareid(const char *resource0_path, int address, int *fw_result){
 
 
     // sudo ./pcimem /sys/devices/pci0000:00/0000:00:02.5/0000:06:00.0/resource0 0x3c w 0x00
