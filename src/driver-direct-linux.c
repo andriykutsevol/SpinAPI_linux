@@ -11,6 +11,7 @@
 #include "driver-os.h"
 #include "debug.h"
 #include "util.h"
+#include "utils_linux.h"
 
 #define MAX_NUM_BOARDS 32
 
