@@ -11,39 +11,8 @@
 #include <stdint.h>
 #include <unistd.h>
 #include "utils_linux.h"
+#include <stdarg.h>
 
-
-
-// char* concat(const char *s1, const char *s2)
-// {
-//     char *result = malloc(strlen(s1) + strlen(s2) + 1); // +1 for the null-terminator
-//     // in real code you would check for errors in malloc here
-//     strcpy(result, s1);
-//     strcat(result, s2);
-//     return result;
-// }
-
-
-// // If you did happen to be bothered by performance then you would want to avoid repeatedly scanning the 
-// // input buffers looking for the null-terminator.
-
-// char* concat(const char *s1, const char *s2)
-// {
-//     const size_t len1 = strlen(s1);
-//     const size_t len2 = strlen(s2);
-//     char *result = malloc(len1 + len2 + 1); // +1 for the null-terminator
-//     // in real code you would check for errors in malloc here
-//     memcpy(result, s1, len1);
-//     memcpy(result + len1, s2, len2 + 1); // +1 to copy the null-terminator
-//     return result;
-// }
-
-
-
-// We can write a useful variadic function to concatenate any number of strings:
-#include <stdlib.h>       // calloc
-#include <stdarg.h>       // va_*
-#include <string.h>       // strlen, strcpy
 
 char* concat(int count, ...)
 {
@@ -75,8 +44,6 @@ char* concat(int count, ...)
 }
 
 
-
-
 char *strremove(char *str, const char *sub) {
     size_t len = strlen(sub);
     if (len > 0) {
@@ -89,7 +56,6 @@ char *strremove(char *str, const char *sub) {
     }
     return str;
 }
-
 
 
 
@@ -149,7 +115,6 @@ int find_resource0_listdir(const char *name, int dev_id, char *result)
 }
 
 
-
 int pci_get_resource0(int dev_id, char *result){
 
     const char *pci_sysdir = "/sys/devices/pci0000:00";
@@ -170,15 +135,7 @@ int pci_get_resource0(int dev_id, char *result){
 
 
 
-
 int pcie_get_firmwareid(const char *resource0_path, int address, int *fw_result){
-
-
-    // sudo ./pcimem /sys/devices/pci0000:00/0000:00:02.5/0000:06:00.0/resource0 0x3c w 0x00
-
-    //void *mmap(void *addr, size_t length, int prot, int flags, int fd, off_t offset);
-    //mmap(0, 4096, 0x3, 0x1, 3, 0x3c)
-    // 
 
     int fd;
     void *map_base, *virt_addr;
@@ -211,18 +168,7 @@ int pcie_get_firmwareid(const char *resource0_path, int address, int *fw_result)
 
     read_result = *((uint32_t *) virt_addr);
 
-    printf("Value at offset 0x%X (%p): 0x%0*lX\n", (int) target + 0*type_width, virt_addr, type_width*2, read_result);
-
-    printf("read_result: %lX\n", read_result);
-
     *fw_result = (int)read_result;
-
-    // target_base = target & ~(sysconf(_SC_PAGE_SIZE)-1);
-    // if (target + items_count*type_width - target_base > map_size)
-	    // map_size = target + items_count*type_width - target_base;
-
-    // map_base = mmap(0, map_size, PROT_READ | PROT_WRITE, MAP_SHARED, fd, target_base);
-
 
     return 0;
 }
