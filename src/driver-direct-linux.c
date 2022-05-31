@@ -238,6 +238,7 @@ os_inw (int card_num, unsigned int address)
 
   // At this place, we have to define all
   // the cards that should be accessed with mmap.
+  // PCI Express PulseBlaster (0x887A = 34938)
   if(dev_id_array[card_num] == 34938){
 
     int fw_result = 0;
