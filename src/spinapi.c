@@ -856,6 +856,8 @@ static void pad_flags (__int64 flags, int flags_padded[3])
 SPINCORE_API int
 pb_inst_pbonly64 (__int64 flags, int inst, int inst_data, double length)
 {
+
+  printf("sofsafe: pb_inst_pbonly64()\n");
   unsigned int delay;
   double pb_clock, clock_period;
   int flags_padded[3];
