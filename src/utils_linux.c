@@ -159,6 +159,7 @@ int mmap_inw(const char *resource0_path, int address, int *fw_result){
     }
 
     map_base = mmap(0, map_size, PROT_READ | PROT_WRITE, MAP_SHARED, fd, target_base);
+    printf("PCI Memory mapped to address 0x%08lx.\n", (unsigned long) map_base);
 
     if(map_base == (void *) -1){
        debug (DEBUG_ERROR, "pci_get_firmwareid(): Cannot mmap"); 
@@ -208,6 +209,7 @@ int mmap_outw(const char *resource0_path, int address, unsigned int data){
     }
 
     map_base = mmap(0, map_size, PROT_READ | PROT_WRITE, MAP_SHARED, fd, target_base);
+    printf("PCI Memory mapped to address 0x%08lx.\n", (unsigned long) map_base);
 
     if(map_base == (void *) -1){
        debug (DEBUG_ERROR, "pci_get_firmwareid(): Cannot mmap"); 
