@@ -213,14 +213,16 @@ os_inp (int card_num, unsigned int address)
  *\return -1 on error
  */
 int
-os_outw (int card_num, unsigned int addresss, unsigned int data)
+os_outw (int card_num, unsigned int address, unsigned int data)
 {
   if (card_num >= num_cards || card_num < 0) {
     debug (DEBUG_ERROR, "os_outw: Card number out of range");
     return -1;
   }
 
-  outl_p (data, base_addr_array[card_num] + addresss);
+  printf("sofsafe: os_outw() 1: address: %x\n", address);
+  printf("sofsafe: os_outw() 2: data: %x\n", data);
+  outl_p (data, base_addr_array[card_num] + address);
   return 0;
 }
 
@@ -244,6 +246,7 @@ os_inw (int card_num, unsigned int address)
     printf("sofsafe: os_inw(): mmap: address: %x\n", address);
 
     int fw_result = 0;
+    // TODO: Rename it, because it is generic function.
     pcie_get_firmwareid(&pci_resource0path_array[512*card_num], address, &fw_result);
 
     printf("sofsafe: os_inw(): mmap: fw_result: %x\n", fw_result);
