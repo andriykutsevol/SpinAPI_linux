@@ -241,8 +241,13 @@ os_inw (int card_num, unsigned int address)
   // PCI Express PulseBlaster (0x887A = 34938)
   if(dev_id_array[card_num] == 34938){
 
+    printf("sofsafe: os_inw(): mmap: address: %x\n", address);
+
     int fw_result = 0;
     pcie_get_firmwareid(&pci_resource0path_array[512*card_num], address, &fw_result);
+
+    printf("sofsafe: os_inw(): mmap: fw_result: %x\n", fw_result);
+
     return fw_result;         // Temporary.
 
   }else{

@@ -92,8 +92,12 @@ int main()
 	pb_reset();
 	pb_start();
 
+	printf("sofsafe: pb_read_status() BEGIN\n");
 	//Read the status register
 	status = pb_read_status();
+	printf("sofsafe: pb_read_status() END\n");
+
+
 	printf("status: %d \n", status);
 	printf("%s\n", pb_status_message());
 
