@@ -247,7 +247,7 @@ os_inw (int card_num, unsigned int address)
 
     int fw_result = 0;
     // TODO: Rename it, because it is generic function.
-    pcie_get_firmwareid(&pci_resource0path_array[512*card_num], address, &fw_result);
+    mmap_inw(&pci_resource0path_array[512*card_num], address, &fw_result);
 
     printf("sofsafe: os_inw(): mmap: fw_result: %x\n", fw_result);
 
