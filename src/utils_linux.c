@@ -165,10 +165,10 @@ int mmap_inw(const char *resource0_path, int address, int *fw_result){
     }
 
     virt_addr = map_base + target - target_base;
-    printf("sofsafe: mmap_outw(): resource0_path: %s\n",  resource0_path);
-    printf("sofsafe: mmap_outw(): target_base: %x\n",  target_base);
-    printf("sofsafe: mmap_outw(): map_base: %x\n",  *(uint32_t *)map_base);
-    printf("sofsafe: mmap_outw(): virt_addr: %x\n", *(uint32_t *)virt_addr);    
+    printf("sofsafe: mmap_inw(): resource0_path: %s\n",  resource0_path);
+    printf("sofsafe: mmap_inw(): target_base: %x\n",  target_base);
+    printf("sofsafe: mmap_inw(): map_base: %x\n",  *(uint32_t *)map_base);
+    printf("sofsafe: mmap_inw(): virt_addr: %x\n", *(uint32_t *)virt_addr);    
 
     read_result = *((uint32_t *) virt_addr);
 
