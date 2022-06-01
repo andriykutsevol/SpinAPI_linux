@@ -241,7 +241,7 @@ os_inw (int card_num, unsigned int address)
   if(dev_id_array[card_num] == 34938){
 
     int fw_result = 0;
-    pcie_get_firmwareid(&pci_resource0path_array[512*card_num], address, &fw_result);
+    mmap_inw(&pci_resource0path_array[512*card_num], address, &fw_result);
     return fw_result;         // Temporary.
 
   }else{
