@@ -298,8 +298,10 @@ pb_start_programming (int device)
   }
   else if (board[cur_board].is_pcie)
     {
+    printf("sofsafe: pb_start_programming() 1\n");  
 	  if (device == PULSE_PROGRAM)
         {
+          printf("sofsafe: pb_start_programming() 2\n"); 
           num_instructions = 0; // Clear number of instructions
 	  
 	      // reset
