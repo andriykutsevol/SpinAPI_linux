@@ -306,6 +306,7 @@ pb_start_programming (int device)
 	  
 	      // reset
           return_value = pb_outw (0, 0);
+          printf("sofsafe: pb_start_programming() 3: %d\n", return_value);
           if (return_value)
             {
               debug(DEBUG_ERROR, "pb_start_programming: Failed to reset PCIe device." );
@@ -314,6 +315,7 @@ pb_start_programming (int device)
       
           // reset counter
           return_value = pb_outw (0x4 << 2, 0);
+          printf("sofsafe: pb_start_programming() 4: %d\n", return_value);
           if (return_value)
             {
               debug(DEBUG_ERROR, "pb_start_programming: Failed to reset PCIe memory counter." );
