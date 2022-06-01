@@ -226,16 +226,16 @@ os_outw (int card_num, unsigned int address, unsigned int data)
   // // At this place, we have to define all
   // // the cards that should be accessed with mmap.
   // // PCI Express PulseBlaster (0x887A = 34938)
-  // if(dev_id_array[card_num] == 34938){
+  if(dev_id_array[card_num] == 34938){
 
-  //   mmap_outw(&pci_resource0path_array[512*card_num], address, data);
+    printf("sofsafe: os_outw(): mmap: address: %x, data:%x\n", address, data);
+    mmap_outw(&pci_resource0path_array[512*card_num], address, data);
 
-  // }else{
+  }else{
 
-  //   outl_p (data, base_addr_array[card_num] + address);
+    outl_p (data, base_addr_array[card_num] + address);
 
-  // }
-  outl_p (data, base_addr_array[card_num] + address);
+  }
 
   return 0;
 }
