@@ -1154,6 +1154,7 @@ pb_inst_direct (const int *pflags, int inst, int inst_data_direct, int length)
         }
       }
       else if (board[cur_board].is_pcie) {
+          printf("sofsafe: pb_inst_direct()\n");
           unsigned int baddr;
 
           // Word addressing, and each IMW is on a 128bit boundary
