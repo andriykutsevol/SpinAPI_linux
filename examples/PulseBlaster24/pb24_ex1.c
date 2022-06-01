@@ -45,7 +45,7 @@ int main()
 
 	//Uncommenting the line below will generate a debug log in your current
 	//directory that can help debug any problems that you may be experiencing   
-	//pb_set_debug(1); 
+	pb_set_debug(1); 
 
 	printf("Copyright (c) 2010 SpinCore Technologies, Inc.\n\n");
 
@@ -72,7 +72,9 @@ int main()
 	// Tell the driver what clock frequency the board has (in MHz)
 	pb_core_clock(clock);
 
+	printf("sofsafe: pb_start_programming() BEGIN\n");
 	pb_start_programming(PULSE_PROGRAM);
+	printf("sofsafe: pb_start_programming() END\n");
 
 	// Instruction 0 - Continue to instruction 1 in 200ms
 	// Flags = 0xFFFFFF, OPCODE = CONTINUE
