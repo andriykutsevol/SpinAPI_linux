@@ -183,7 +183,6 @@ int mmap_inw(const char *resource0_path, int address, int *fw_result){
     int type_width = 4;
     void *map_base;
 
-
     get_mmap_map_base(resource0_path, address, virt_addr, map_base, map_size);
 
     read_result = *((uint32_t *) virt_addr);
