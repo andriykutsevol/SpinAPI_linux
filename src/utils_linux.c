@@ -135,13 +135,12 @@ int pci_get_resource0(int dev_id, char *result){
 
 
 
-int mmap_inw(const char *resource0_path, int address, int *fw_result){
+int get_mmap_map_base(const char *resource0_path, int address, void *virt_addr, void *map_base, int map_size){
 
     int fd;
-    void *map_base, *virt_addr;
+    void *map_base;
     int type_width;
     off_t target, target_base;
-    int map_size = 4096UL;
     int items_count = 1;
 
     uint64_t read_result;
@@ -171,6 +170,23 @@ int mmap_inw(const char *resource0_path, int address, int *fw_result){
     printf("sofsafe: mmap_outw(): target: 0x%08lx\n",  target);
     printf("sofsafe: mmap_outw(): target_base: 0x%08lx\n",  target_base);
     printf("sofsafe: mmap_outw(): virt_addr: 0x%08lx\n", (unsigned long)virt_addr); 
+
+
+
+    return 0;
+}
+
+
+
+
+int mmap_inw(const char *resource0_path, int address, int *fw_result){
+
+    void *virt_addr;
+    uint64_t read_result;
+    int map_size = 4096UL;
+    void *map_base;
+
+    get_mmap_map_base(resource0_path, address, virt_addr, map_base, map_size);
 
     read_result = *((uint32_t *) virt_addr);
 
