@@ -135,18 +135,14 @@ int pci_get_resource0(int dev_id, char *result){
 
 
 
-int get_mmap_map_base(const char *resource0_path, int address, void *virt_addr, void *map_base, int map_size){
+int get_mmap_map_base(const char *resource0_path, int address, void *virt_addr, void *map_base, int map_size, int type_width){
 
     int fd;
-    void *map_base;
-    int type_width;
     off_t target, target_base;
     int items_count = 1;
-
     uint64_t read_result;
 
     target = (off_t)address;
-    type_width = 4;
     
     target_base = target & ~(sysconf(_SC_PAGE_SIZE)-1);
     if (target + items_count*type_width - target_base > map_size)
@@ -184,7 +180,9 @@ int mmap_inw(const char *resource0_path, int address, int *fw_result){
     void *virt_addr;
     uint64_t read_result;
     int map_size = 4096UL;
+    int type_width = 4;
     void *map_base;
+
 
     get_mmap_map_base(resource0_path, address, virt_addr, map_base, map_size);
 
