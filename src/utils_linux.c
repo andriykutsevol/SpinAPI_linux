@@ -193,23 +193,12 @@ int mmap_inw(const char *resource0_path, int address, int *fw_result){
     read_result = *((uint32_t *) virt_addr);
     *fw_result = (int)read_result;
 
-    char char_result = (char) virt_addr;
+    char *char_result = (char *) virt_addr;
     printf("zzzzzzzzzz char_result: %x\n", char_result);
     printf("zzzzzzzzzz char_result: %d\n", char_result);
     printf("zzzzzzzzzz char_result: %c\n", char_result);
 
-    char read_result_char;
-    read_result_char = *((char *) virt_addr);
 
-    printf("zzzzzzzzzz read_result_char: %x\n", read_result_char);
-    printf("zzzzzzzzzz read_result_char: %d\n", read_result_char);
-    printf("zzzzzzzzzz read_result_char: %c\n", read_result_char);
-
-    read_result_char = *((char *) (virt_addr + 8));
-
-    printf("zzzzzzzzzz read_result_char: %x\n", read_result_char);
-    printf("zzzzzzzzzz read_result_char: %d\n", read_result_char);
-    printf("zzzzzzzzzz read_result_char: %c\n", read_result_char);
 
 
     printf("zzzzzzzzzz fw_result:  %x\n", *fw_result);
