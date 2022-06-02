@@ -187,7 +187,7 @@ int mmap_inw(const char *resource0_path, int address, int *fw_result){
 
     get_mmap_virt_addr(resource0_path, address, virt_addr, map_base, map_size);
 
-    read_result = *((uint32_t *) virt_addr);
+    // read_result = *((uint32_t *) virt_addr);
 
     // *fw_result = (int)read_result;
 
