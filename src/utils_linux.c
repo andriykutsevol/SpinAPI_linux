@@ -138,7 +138,7 @@ int pci_get_resource0(int dev_id, char *result){
 int get_mmap_virt_addr(const char *resource0_path, 
                         int address, 
                         void **virt_addr, 
-                        void *map_base, 
+                        void **map_base, 
                         const int map_size){
 
     int fd;
@@ -157,16 +157,16 @@ int get_mmap_virt_addr(const char *resource0_path,
         return -1;
     }
 
-    map_base = mmap(0, map_size, PROT_READ | PROT_WRITE, MAP_SHARED, fd, target_base);
-    printf("PCI Memory mapped to address 0x%08lx.\n", (unsigned long) map_base);
+    *map_base = mmap(0, map_size, PROT_READ | PROT_WRITE, MAP_SHARED, fd, target_base);
+    printf("PCI Memory mapped to address 0x%08lx.\n", (unsigned long) *map_base);
 
-    if(map_base == (void *) -1){
+    if(*map_base == (void *) -1){
        debug (DEBUG_ERROR, "pci_get_firmwareid(): Cannot mmap"); 
     }
 
-    *virt_addr = map_base + target - target_base;
+    *virt_addr = *map_base + target - target_base;
     printf("sofsafe: mmap_outw(): resource0_path: %s\n",  resource0_path);
-    printf("sofsafe: mmap_outw(): map_base: 0x%08lx\n",  (unsigned long)map_base);
+    printf("sofsafe: mmap_outw(): map_base: 0x%08lx\n",  (unsigned long)*map_base);
     printf("sofsafe: mmap_outw(): target: 0x%08lx\n",  target);
     printf("sofsafe: mmap_outw(): target_base: 0x%08lx\n",  target_base);
     printf("sofsafe: mmap_outw(): virt_addr: 0x%08lx\n", (unsigned long)*virt_addr); 
@@ -185,9 +185,10 @@ int mmap_inw(const char *resource0_path, int address, int *fw_result){
     const int type_width = 4;
     void *map_base;
 
-    get_mmap_virt_addr(resource0_path, address, &virt_addr, map_base, map_size);
+    get_mmap_virt_addr(resource0_path, address, &virt_addr, &map_base, map_size);
 
     printf("sofsafe: mmap_outw(): virt_addr: 0x%08lx\n", (unsigned long)virt_addr);
+    printf("sofsafe: mmap_outw(): map_base: 0x%08lx\n",  (unsigned long)map_base);
 
     read_result = *((uint32_t *) virt_addr);
     *fw_result = (int)read_result;
