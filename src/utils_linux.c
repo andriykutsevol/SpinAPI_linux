@@ -208,7 +208,7 @@ int mmap_inw(const char *resource0_path, int address, int *fw_result){
     printf("zzzzzzzzzz char_result_p: %c\n", char_result_p);
 
 
-    char char_result_e0 = *((char *) virt_addr + 1);
+    char char_result_e0 = *((char *) virt_addr);
     char char_result_c0 = (char)char_result_e0;
 
     printf("zzzzzzzzzz char_result_e0: %x\n", char_result_c0);
