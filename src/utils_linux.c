@@ -197,31 +197,48 @@ int mmap_inw(const char *resource0_path, int address, int *fw_result){
     // sofsafe: os_inw(): mmap: fw_result: 1701
     // sofsafe: mmap_outw(): virt_addr: 0x7f0cc112c03c
 
-    char char_result = (char) virt_addr;
+    char char_result = (char) virt_addr;                    // get first byte of a pointer (3c)
     printf("zzzzzzzzzz char_result: %x\n", char_result);
     printf("zzzzzzzzzz char_result: %d\n", char_result);
     printf("zzzzzzzzzz char_result: %c\n", char_result);
 
-    char char_result_p = (char) virt_addr + 1;
+    // zzzzzzzzzz char_result: 3c
+    // zzzzzzzzzz char_result: 60
+    // zzzzzzzzzz char_result: <
+
+
+    char char_result_p = (char) virt_addr + 1;                  // increment a pointer (3d)
     printf("zzzzzzzzzz char_result_p: %x\n", char_result_p);
     printf("zzzzzzzzzz char_result_p: %d\n", char_result_p);
     printf("zzzzzzzzzz char_result_p: %c\n", char_result_p);
 
+    // zzzzzzzzzz char_result_p: 3d
+    // zzzzzzzzzz char_result_p: 61
+    // zzzzzzzzzz char_result_p: =
 
-    char char_result_e0 = *((char *) virt_addr);
+
+
+    char char_result_e0 = *((char *) virt_addr);                // get first byte of a value at a pointer (01)
     char char_result_c0 = (char)char_result_e0;
 
     printf("zzzzzzzzzz char_result_e0: %x\n", char_result_c0);
     printf("zzzzzzzzzz char_result_e0: %d\n", char_result_c0);
     printf("zzzzzzzzzz char_result_e0: %c\n", char_result_c0);
 
+    // zzzzzzzzzz char_result_e0: 1
+    // zzzzzzzzzz char_result_e0: 1
+    // zzzzzzzzzz char_result_e0: 
 
-    char char_result_e = *((char *) virt_addr + 1);
+    char char_result_e = *((char *) virt_addr + 1);             // get a next byte of a value at a pointer (17)
     char char_result_c = (char)char_result_e;
 
     printf("zzzzzzzzzz char_result_e: %x\n", char_result_c);
     printf("zzzzzzzzzz char_result_e: %d\n", char_result_c);
     printf("zzzzzzzzzz char_result_e: %c\n", char_result_c);
+
+    // zzzzzzzzzz char_result_e: 17
+    // zzzzzzzzzz char_result_e: 23
+    // zzzzzzzzzz char_result_e: 
 
 
     printf("zzzzzzzzzz fw_result:  %x\n", *fw_result);
