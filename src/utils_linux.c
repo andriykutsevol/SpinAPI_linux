@@ -194,6 +194,9 @@ int mmap_inw(const char *resource0_path, int address, int *fw_result){
     *fw_result = (int)read_result;
 
 
+    // sofsafe: os_inw(): mmap: fw_result: 1701
+    // sofsafe: mmap_outw(): virt_addr: 0x7f0cc112c03c
+
     char char_result = (char) virt_addr;
     printf("zzzzzzzzzz char_result: %x\n", char_result);
     printf("zzzzzzzzzz char_result: %d\n", char_result);
@@ -203,6 +206,15 @@ int mmap_inw(const char *resource0_path, int address, int *fw_result){
     printf("zzzzzzzzzz char_result_p: %x\n", char_result_p);
     printf("zzzzzzzzzz char_result_p: %d\n", char_result_p);
     printf("zzzzzzzzzz char_result_p: %c\n", char_result_p);
+
+
+    char char_result_e0 = *((char *) virt_addr + 1);
+    char char_result_c0 = (char)char_result_e0;
+
+    printf("zzzzzzzzzz char_result_e0: %x\n", char_result_c0);
+    printf("zzzzzzzzzz char_result_e0: %d\n", char_result_c0);
+    printf("zzzzzzzzzz char_result_e0: %c\n", char_result_c0);
+
 
     char char_result_e = *((char *) virt_addr + 1);
     char char_result_c = (char)char_result_e;
