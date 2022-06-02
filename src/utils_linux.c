@@ -193,7 +193,7 @@ int mmap_inw(const char *resource0_path, int address, int *fw_result){
     read_result = *((uint32_t *) virt_addr);
     *fw_result = (int)read_result;
 
-    // if(munmap(map_base, map_size) == -1) debug (DEBUG_ERROR, "pci_get_firmwareid(): Cannot munmap"); 
+    if(munmap(map_base, map_size) == -1) debug (DEBUG_ERROR, "pci_get_firmwareid(): Cannot munmap"); 
 
     return 0;
 }
