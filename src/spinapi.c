@@ -297,15 +297,12 @@ pb_start_programming (int device)
         }
   }
   else if (board[cur_board].is_pcie)
-    {
-    printf("sofsafe: pb_start_programming() 1\n");  
+    {  
 	  if (device == PULSE_PROGRAM)
         {
-          printf("sofsafe: pb_start_programming() 2\n"); 
           num_instructions = 0; // Clear number of instructions
 	  
 	      // reset
-          printf("sofsafe: pb_start_programming() 3 //RESET\n");
           return_value = pb_outw (0, 0);
           
           if (return_value)
@@ -315,7 +312,6 @@ pb_start_programming (int device)
             }
       
           // reset counter
-          printf("sofsafe: pb_start_programming() 4 //RESET COUNTER\n");
           return_value = pb_outw (0x4 << 2, 0);
           if (return_value)
             {
@@ -857,7 +853,6 @@ SPINCORE_API int
 pb_inst_pbonly64 (__int64 flags, int inst, int inst_data, double length)
 {
 
-  printf("sofsafe: pb_inst_pbonly64()\n");
   unsigned int delay;
   double pb_clock, clock_period;
   int flags_padded[3];
@@ -1154,7 +1149,6 @@ pb_inst_direct (const int *pflags, int inst, int inst_data_direct, int length)
         }
       }
       else if (board[cur_board].is_pcie) {
-          printf("sofsafe: pb_inst_direct(): board[cur_board].is_pcie\n");
           unsigned int baddr;
 
           // Word addressing, and each IMW is on a 128bit boundary
