@@ -66,8 +66,11 @@ int find_resource0_listdir(const char *name, int dev_id, char *result)
     FILE* fd;
     char *path_to_resource0;
 
-    if (!(dir = opendir(name)))
-        return 2;
+    if (!(dir = opendir(name))){
+        debug (DEBUG_ERROR, "find_resource0_listdir(): Cannot open system directory");
+        return -1;
+    }
+        
 
     while ((de = readdir(dir)) != NULL) {
 
@@ -111,14 +114,19 @@ int find_resource0_listdir(const char *name, int dev_id, char *result)
         }
     }
     closedir(dir);
-    return 1;
+    debug (DEBUG_ERROR, "find_resource0_listdir(): Cannot find PCI device");
+    return -1;
 }
 
 
 int pci_get_resource0(int dev_id, char *result){
 
     const char *pci_sysdir = "/sys/devices/pci0000:00";
-    find_resource0_listdir(pci_sysdir, dev_id, result);
+    
+    if (find_resource0_listdir(pci_sysdir, dev_id, result) == -1){
+        debug (DEBUG_ERROR, "pci_get_resource0(): find_resource0_listdir() error");
+        return -1;
+    }
 
     FILE *file;
     if ((file = fopen(result, "r")))
@@ -161,6 +169,7 @@ int get_mmap_virt_addr(const char *resource0_path,
 
     if(*map_base == (void *) -1){
        debug (DEBUG_ERROR, "pci_get_firmwareid(): Cannot mmap"); 
+       return -1;
     }
 
     *virt_addr = *map_base + target - target_base;
@@ -247,11 +256,18 @@ int mmap_outw(const char *resource0_path, int address, unsigned int data){
     const int type_width = 4;
     void *map_base;
 
-    get_mmap_virt_addr(resource0_path, address, &virt_addr, &map_base, map_size);
+    if (get_mmap_virt_addr(resource0_path, address, &virt_addr, &map_base, map_size) == -1){
+        debug (DEBUG_ERROR, "mmap_outw(): get_mmap_virt_addr() error");
+        return -1;
+    }
+
 
     *((uint32_t *) virt_addr) = data;
 
-    if(munmap(map_base, map_size) == -1) debug (DEBUG_ERROR, "mmap_inw(): Cannot munmap"); 
+    if(munmap(map_base, map_size) == -1) {
+        debug (DEBUG_ERROR, "mmap_inw(): Cannot munmap");
+        return -1;
+    }
 
     return 0; 
 

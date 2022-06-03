@@ -245,7 +245,10 @@ os_outw (int card_num, unsigned int address, unsigned int data)
   // PCI Express PulseBlaster (0x887A = 34938)
   if(dev_id_array[card_num] == 34938){
 
-    mmap_outw(&pci_resource0path_array[512*card_num], address, data);
+    if (mmap_outw(&pci_resource0path_array[512*card_num], address, data) == -1){
+      debug (DEBUG_ERROR, "os_outw(): mmap_outw() error");
+      return -1;
+    }
 
   }else{
 
