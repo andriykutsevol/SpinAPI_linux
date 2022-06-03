@@ -185,6 +185,7 @@ os_outp (int card_num, unsigned int address, char data)
     return -1;
   }
 	
+  
   // At this place, we have to define all
   // the cards that should be accessed with mmap.
   // PCI Express PulseBlaster (0x887A = 34938)
