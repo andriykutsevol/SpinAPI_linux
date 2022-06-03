@@ -185,8 +185,18 @@ os_outp (int card_num, unsigned int address, char data)
     return -1;
   }
 	
-  outb_p (data, base_addr_array[card_num] + address);
-  return 0;
+  
+  // At this place, we have to define all
+  // the cards that should be accessed with mmap.
+  // PCI Express PulseBlaster (0x887A = 34938)
+  if(dev_id_array[card_num] == 34938){  
+  
+    mmap_outb(&pci_resource0path_array[512*card_num], address, data);
+
+  }else{
+    outb_p (data, base_addr_array[card_num] + address);
+    return 0;
+  }
 }
 
 /**
@@ -203,7 +213,17 @@ os_inp (int card_num, unsigned int address)
       return -1;
   }
 
-  data = inb_p (base_addr_array[card_num] + address);
+
+  // At this place, we have to define all
+  // the cards that should be accessed with mmap.
+  // PCI Express PulseBlaster (0x887A = 34938)
+  if(dev_id_array[card_num] == 34938){
+
+    mmap_inb(&pci_resource0path_array[512*card_num], address, &data);
+
+  }else{
+    data = inb_p (base_addr_array[card_num] + address);
+  }
 
   return data;
 }
@@ -213,14 +233,30 @@ os_inp (int card_num, unsigned int address)
  *\return -1 on error
  */
 int
-os_outw (int card_num, unsigned int addresss, unsigned int data)
+os_outw (int card_num, unsigned int address, unsigned int data)
 {
   if (card_num >= num_cards || card_num < 0) {
     debug (DEBUG_ERROR, "os_outw: Card number out of range");
     return -1;
   }
 
-  outl_p (data, base_addr_array[card_num] + addresss);
+  printf("sofsafe: os_outw() 1: address: %x\n", address);
+  printf("sofsafe: os_outw() 2: data: %x\n", data);
+
+  // At this place, we have to define all
+  // the cards that should be accessed with mmap.
+  // PCI Express PulseBlaster (0x887A = 34938)
+  if(dev_id_array[card_num] == 34938){
+
+    printf("sofsafe: os_outw(): mmap: address: %x, data:%x\n", address, data);
+    mmap_outw(&pci_resource0path_array[512*card_num], address, data);
+
+  }else{
+
+    outl_p (data, base_addr_array[card_num] + address);
+
+  }
+
   return 0;
 }
 
@@ -241,9 +277,15 @@ os_inw (int card_num, unsigned int address)
   // PCI Express PulseBlaster (0x887A = 34938)
   if(dev_id_array[card_num] == 34938){
 
-    int fw_result = 0;
-    pcie_get_firmwareid(&pci_resource0path_array[512*card_num], address, &fw_result);
-    return fw_result;         // Temporary.
+    printf("sofsafe: os_inw(): mmap: address: %x\n", address);
+
+    int result = 0;
+    // TODO: Rename it, because it is generic function.
+    mmap_inw(&pci_resource0path_array[512*card_num], address, &result);
+
+    printf("sofsafe: os_inw(): mmap: result: %x\n", result);
+
+    return result;         // Temporary.
 
   }else{
     return inl_p (base_addr_array[card_num] + address);
