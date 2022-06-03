@@ -190,7 +190,7 @@ os_outp (int card_num, unsigned int address, char data)
   // PCI Express PulseBlaster (0x887A = 34938)
   if(dev_id_array[card_num] == 34938){  
   
-    mmap_inb(&pci_resource0path_array[512*card_num], address, data);
+    mmap_outb(&pci_resource0path_array[512*card_num], address, data);
 
   }else{
     outb_p (data, base_addr_array[card_num] + address);
