@@ -185,8 +185,17 @@ os_outp (int card_num, unsigned int address, char data)
     return -1;
   }
 	
-  outb_p (data, base_addr_array[card_num] + address);
-  return 0;
+  // At this place, we have to define all
+  // the cards that should be accessed with mmap.
+  // PCI Express PulseBlaster (0x887A = 34938)
+  if(dev_id_array[card_num] == 34938){  
+  
+    mmap_inb(&pci_resource0path_array[512*card_num], address, data);
+
+  }else{
+    outb_p (data, base_addr_array[card_num] + address);
+    return 0;
+  }
 }
 
 /**
@@ -203,7 +212,17 @@ os_inp (int card_num, unsigned int address)
       return -1;
   }
 
-  data = inb_p (base_addr_array[card_num] + address);
+
+  // At this place, we have to define all
+  // the cards that should be accessed with mmap.
+  // PCI Express PulseBlaster (0x887A = 34938)
+  if(dev_id_array[card_num] == 34938){
+
+    mmap_inb(&pci_resource0path_array[512*card_num], address, &data);
+
+  }else{
+    data = inb_p (base_addr_array[card_num] + address);
+  }
 
   return data;
 }
@@ -223,9 +242,9 @@ os_outw (int card_num, unsigned int address, unsigned int data)
   printf("sofsafe: os_outw() 1: address: %x\n", address);
   printf("sofsafe: os_outw() 2: data: %x\n", data);
 
-  // // At this place, we have to define all
-  // // the cards that should be accessed with mmap.
-  // // PCI Express PulseBlaster (0x887A = 34938)
+  // At this place, we have to define all
+  // the cards that should be accessed with mmap.
+  // PCI Express PulseBlaster (0x887A = 34938)
   if(dev_id_array[card_num] == 34938){
 
     printf("sofsafe: os_outw(): mmap: address: %x, data:%x\n", address, data);
@@ -259,13 +278,13 @@ os_inw (int card_num, unsigned int address)
 
     printf("sofsafe: os_inw(): mmap: address: %x\n", address);
 
-    int fw_result = 0;
+    int result = 0;
     // TODO: Rename it, because it is generic function.
-    mmap_inw(&pci_resource0path_array[512*card_num], address, &fw_result);
+    mmap_inw(&pci_resource0path_array[512*card_num], address, &result);
 
-    printf("sofsafe: os_inw(): mmap: fw_result: %x\n", fw_result);
+    printf("sofsafe: os_inw(): mmap: result: %x\n", result);
 
-    return fw_result;         // Temporary.
+    return result;         // Temporary.
 
   }else{
     return inl_p (base_addr_array[card_num] + address);

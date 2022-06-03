@@ -175,9 +175,57 @@ int get_mmap_virt_addr(const char *resource0_path,
 }
 
 
+/**
+ * Read a byte of data from the given card, at the given address
+ * \return value from IO address
+ */
+
+int mmap_inb(const char *resource0_path, int address, char *result){
+
+    void *virt_addr;
+    uint64_t read_result;
+    const int map_size = 4096UL;
+    const int type_width = 4;
+    void *map_base;
+
+    get_mmap_virt_addr(resource0_path, address, &virt_addr, &map_base, map_size);
+
+    char char_result_e0 = *((char *) virt_addr);
+    *result = (char)char_result_e0;
+
+    if(munmap(map_base, map_size) == -1) debug (DEBUG_ERROR, "mmap_inb(): Cannot munmap"); 
+
+    return 0;
+}
 
 
-int mmap_inw(const char *resource0_path, int address, int *fw_result){
+/**
+ * Write a byte of data to the given card, at given the address.
+ * \return -1 on error
+ */
+
+int mmap_outb(const char *resource0_path, int address, char data){
+
+    void *virt_addr;
+    uint64_t read_result;
+    const int map_size = 4096UL;
+    const int type_width = 4;
+    void *map_base;
+
+    get_mmap_virt_addr(resource0_path, address, &virt_addr, &map_base, map_size);
+
+    *((char *) virt_addr) = data;
+
+    if(munmap(map_base, map_size) == -1) debug (DEBUG_ERROR, "mmap_outb(): Cannot munmap"); 
+
+    return 0;
+
+}
+
+
+
+
+int mmap_inw(const char *resource0_path, int address, int *result){
 
     void *virt_addr;
     uint64_t read_result;
@@ -191,10 +239,10 @@ int mmap_inw(const char *resource0_path, int address, int *fw_result){
     printf("sofsafe: mmap_inw(): map_base: 0x%08lx\n",  (unsigned long)map_base);
 
     read_result = *((uint32_t *) virt_addr);
-    *fw_result = (int)read_result;
+    *result = (int)read_result;
 
 
-    // sofsafe: os_inw(): mmap: fw_result: 1701
+    // sofsafe: os_inw(): mmap: result: 1701
     // sofsafe: mmap_outw(): virt_addr: 0x7f0cc112c03c
 
     char char_result = (char) virt_addr;                    // get first byte of a pointer (3c)
@@ -241,10 +289,10 @@ int mmap_inw(const char *resource0_path, int address, int *fw_result){
     // zzzzzzzzzz char_result_e: 
 
 
-    printf("zzzzzzzzzz fw_result:  %x\n", *fw_result);
-    printf("zzzzzzzzzz fw_result:  %d\n", *fw_result);
+    printf("zzzzzzzzzz fw_result:  %x\n", *result);
+    printf("zzzzzzzzzz fw_result:  %d\n", *result);
 
-    if(munmap(map_base, map_size) == -1) debug (DEBUG_ERROR, "pci_get_firmwareid(): Cannot munmap"); 
+    if(munmap(map_base, map_size) == -1) debug (DEBUG_ERROR, "mmap_inw(): Cannot munmap"); 
 
     return 0;
 }
@@ -266,7 +314,7 @@ int mmap_outw(const char *resource0_path, int address, unsigned int data){
 
     *((uint32_t *) virt_addr) = data;
 
-    if(munmap(map_base, map_size) == -1) debug (DEBUG_ERROR, "pci_get_firmwareid(): Cannot munmap"); 
+    if(munmap(map_base, map_size) == -1) debug (DEBUG_ERROR, "mmap_inw(): Cannot munmap"); 
 
     return 0; 
 
