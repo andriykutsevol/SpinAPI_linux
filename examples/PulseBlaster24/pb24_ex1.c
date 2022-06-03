@@ -45,7 +45,7 @@ int main()
 
 	//Uncommenting the line below will generate a debug log in your current
 	//directory that can help debug any problems that you may be experiencing   
-	//pb_set_debug(1); 
+	pb_set_debug(1); 
 
 	printf("Copyright (c) 2010 SpinCore Technologies, Inc.\n\n");
 
@@ -87,6 +87,7 @@ int main()
 	pb_inst(0x0, BRANCH, start, 100.0 * ms);
 
 	pb_stop_programming();
+
 	
 	// Trigger the pulse program
 	pb_reset();
@@ -94,6 +95,7 @@ int main()
 
 	//Read the status register
 	status = pb_read_status();
+
 	printf("status: %d \n", status);
 	printf("%s\n", pb_status_message());
 

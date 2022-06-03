@@ -297,13 +297,14 @@ pb_start_programming (int device)
         }
   }
   else if (board[cur_board].is_pcie)
-    {
+    {  
 	  if (device == PULSE_PROGRAM)
         {
           num_instructions = 0; // Clear number of instructions
 	  
 	      // reset
           return_value = pb_outw (0, 0);
+          
           if (return_value)
             {
               debug(DEBUG_ERROR, "pb_start_programming: Failed to reset PCIe device." );
@@ -851,6 +852,7 @@ static void pad_flags (__int64 flags, int flags_padded[3])
 SPINCORE_API int
 pb_inst_pbonly64 (__int64 flags, int inst, int inst_data, double length)
 {
+
   unsigned int delay;
   double pb_clock, clock_period;
   int flags_padded[3];
@@ -1588,6 +1590,7 @@ pb_inp (unsigned int address)
     }
 }
 
+// If this function returns non zero, it is considered as an error.
 SPINCORE_API int
 pb_outw (unsigned int address, unsigned int data)
 {
@@ -1601,6 +1604,11 @@ pb_outw (unsigned int address, unsigned int data)
   return os_outw (cur_board, address, data);
 }
 
+
+// TODO: unsigned int -> return -1 ?
+// This function has to return the "error code",
+// and put the response in the argument pointer.
+// This function does not have an error handling, upstream call stack.
 SPINCORE_API unsigned int
 pb_inw (unsigned int address)
 {

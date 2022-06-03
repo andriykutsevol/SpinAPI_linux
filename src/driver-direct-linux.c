@@ -99,7 +99,9 @@ os_count_boards (int vend_id)
       // We are trying to get the "resource0" for every card.
       // If it is not a PCI card it will not find anything.
       // Later we will use this output for cards that for sure has a PCIe interface.
-      pci_get_resource0(detected_dev_id, &pci_resource0path_array[512*i]);
+      if (pci_get_resource0(detected_dev_id, &pci_resource0path_array[512*i]) == -1){
+        debug (DEBUG_INFO, "os_count_boards(): It is not a PCI card.");
+      }
 
 			i++;
 		}
@@ -185,14 +187,32 @@ os_outp (int card_num, unsigned int address, char data)
     return -1;
   }
 	
-  outb_p (data, base_addr_array[card_num] + address);
-  return 0;
+  
+  // At this place, we have to define all
+  // the cards that should be accessed with mmap.
+  // PCI Express PulseBlaster (0x887A = 34938)
+  if(dev_id_array[card_num] == 34938){  
+  
+    if(mmap_outb(&pci_resource0path_array[512*card_num], address, data) == -1){
+      debug (DEBUG_ERROR, "os_outp: mmap_outb() error");
+      return -1;
+    }
+
+  }else{
+    outb_p (data, base_addr_array[card_num] + address);
+    return 0;
+  }
 }
 
 /**
  * Read a byte of data from the given card, at the given address
  * \return value from IO address
  */
+
+// TODO: This function is supposed to return a value (char), 
+// but it can also return an error code (signed int). 
+// It's better to return a value in a pointer argument. 
+// And the error code using "return".
 char
 os_inp (int card_num, unsigned int address)
 {
@@ -203,7 +223,17 @@ os_inp (int card_num, unsigned int address)
       return -1;
   }
 
-  data = inb_p (base_addr_array[card_num] + address);
+
+  // At this place, we have to define all
+  // the cards that should be accessed with mmap.
+  // PCI Express PulseBlaster (0x887A = 34938)
+  if(dev_id_array[card_num] == 34938){
+
+    mmap_inb(&pci_resource0path_array[512*card_num], address, &data);
+
+  }else{
+    data = inb_p (base_addr_array[card_num] + address);
+  }
 
   return data;
 }
@@ -213,14 +243,27 @@ os_inp (int card_num, unsigned int address)
  *\return -1 on error
  */
 int
-os_outw (int card_num, unsigned int addresss, unsigned int data)
+os_outw (int card_num, unsigned int address, unsigned int data)
 {
   if (card_num >= num_cards || card_num < 0) {
     debug (DEBUG_ERROR, "os_outw: Card number out of range");
     return -1;
   }
 
-  outl_p (data, base_addr_array[card_num] + addresss);
+  // At this place, we have to define all
+  // the cards that should be accessed with mmap.
+  // PCI Express PulseBlaster (0x887A = 34938)
+  if(dev_id_array[card_num] == 34938){
+
+    if (mmap_outw(&pci_resource0path_array[512*card_num], address, data) == -1){
+      debug (DEBUG_ERROR, "os_outw(): mmap_outw() error");
+      return -1;
+    }
+
+  }else{
+    outl_p (data, base_addr_array[card_num] + address);
+  }
+
   return 0;
 }
 
@@ -238,11 +281,12 @@ os_inw (int card_num, unsigned int address)
 
   // At this place, we have to define all
   // the cards that should be accessed with mmap.
+  // PCI Express PulseBlaster (0x887A = 34938)
   if(dev_id_array[card_num] == 34938){
 
-    int fw_result = 0;
-    mmap_inw(&pci_resource0path_array[512*card_num], address, &fw_result);
-    return fw_result;         // Temporary.
+    int result = 0;
+    mmap_inw(&pci_resource0path_array[512*card_num], address, &result);
+    return result;
 
   }else{
     return inl_p (base_addr_array[card_num] + address);
