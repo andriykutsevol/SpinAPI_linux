@@ -193,7 +193,10 @@ os_outp (int card_num, unsigned int address, char data)
   // PCI Express PulseBlaster (0x887A = 34938)
   if(dev_id_array[card_num] == 34938){  
   
-    mmap_outb(&pci_resource0path_array[512*card_num], address, data);
+    if(mmap_outb(&pci_resource0path_array[512*card_num], address, data) == -1){
+      debug (DEBUG_ERROR, "os_outp: mmap_outb() error");
+      return -1;
+    }
 
   }else{
     outb_p (data, base_addr_array[card_num] + address);
@@ -205,6 +208,11 @@ os_outp (int card_num, unsigned int address, char data)
  * Read a byte of data from the given card, at the given address
  * \return value from IO address
  */
+
+// TODO: This function is supposed to return a value (char), 
+// but it can also return an error code (signed int). 
+// It's better to return a value in a pointer argument. 
+// And the error code using "return".
 char
 os_inp (int card_num, unsigned int address)
 {
@@ -253,9 +261,7 @@ os_outw (int card_num, unsigned int address, unsigned int data)
     }
 
   }else{
-
     outl_p (data, base_addr_array[card_num] + address);
-
   }
 
   return 0;
@@ -280,7 +286,7 @@ os_inw (int card_num, unsigned int address)
 
     int result = 0;
     mmap_inw(&pci_resource0path_array[512*card_num], address, &result);
-    return result;         // Temporary.
+    return result;
 
   }else{
     return inl_p (base_addr_array[card_num] + address);

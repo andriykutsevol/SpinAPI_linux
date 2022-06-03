@@ -1590,6 +1590,7 @@ pb_inp (unsigned int address)
     }
 }
 
+// If this function returns non zero, it is considered as an error.
 SPINCORE_API int
 pb_outw (unsigned int address, unsigned int data)
 {
@@ -1603,6 +1604,11 @@ pb_outw (unsigned int address, unsigned int data)
   return os_outw (cur_board, address, data);
 }
 
+
+// TODO: unsigned int -> return -1 ?
+// This function has to return the "error code",
+// and put the response in the argument pointer.
+// This function does not have an error handling, upstream call stack.
 SPINCORE_API unsigned int
 pb_inw (unsigned int address)
 {

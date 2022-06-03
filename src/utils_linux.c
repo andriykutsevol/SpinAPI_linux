@@ -179,7 +179,7 @@ int get_mmap_virt_addr(const char *resource0_path,
 
 
 /**
- * Read a byte of data from the given card, at the given address
+ * Read a byte of data from the given card, at a given address
  * \return value from IO address
  */
 
@@ -191,7 +191,10 @@ int mmap_inb(const char *resource0_path, int address, char *result){
     const int type_width = 4;
     void *map_base;
 
-    get_mmap_virt_addr(resource0_path, address, &virt_addr, &map_base, map_size);
+    if (get_mmap_virt_addr(resource0_path, address, &virt_addr, &map_base, map_size) == -1){
+        debug (DEBUG_ERROR, "mmap_inb(): get_mmap_virt_addr() error");
+        return -1;
+    }
 
     char char_result_e0 = *((char *) virt_addr);
     *result = (char)char_result_e0;
@@ -203,7 +206,7 @@ int mmap_inb(const char *resource0_path, int address, char *result){
 
 
 /**
- * Write a byte of data to the given card, at given the address.
+ * Write a byte of data to the given card, at a given address.
  * \return -1 on error
  */
 
@@ -215,7 +218,10 @@ int mmap_outb(const char *resource0_path, int address, char data){
     const int type_width = 4;
     void *map_base;
 
-    get_mmap_virt_addr(resource0_path, address, &virt_addr, &map_base, map_size);
+    if (get_mmap_virt_addr(resource0_path, address, &virt_addr, &map_base, map_size) == -1){
+        debug (DEBUG_ERROR, "mmap_outb(): get_mmap_virt_addr() error");
+        return -1;
+    }
 
     *((char *) virt_addr) = data;
 
@@ -236,7 +242,10 @@ int mmap_inw(const char *resource0_path, int address, int *result){
     const int type_width = 4;
     void *map_base;
 
-    get_mmap_virt_addr(resource0_path, address, &virt_addr, &map_base, map_size);
+    if (get_mmap_virt_addr(resource0_path, address, &virt_addr, &map_base, map_size) == -1){
+        debug (DEBUG_ERROR, "mmap_inw(): get_mmap_virt_addr() error");
+        return -1;
+    }
 
     read_result = *((uint32_t *) virt_addr);
     *result = (int)read_result;
@@ -264,10 +273,7 @@ int mmap_outw(const char *resource0_path, int address, unsigned int data){
 
     *((uint32_t *) virt_addr) = data;
 
-    if(munmap(map_base, map_size) == -1) {
-        debug (DEBUG_ERROR, "mmap_inw(): Cannot munmap");
-        return -1;
-    }
+    if(munmap(map_base, map_size) == -1) debug (DEBUG_ERROR, "mmap_inw(): Cannot munmap");
 
     return 0; 
 
