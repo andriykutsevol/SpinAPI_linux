@@ -16,7 +16,6 @@ and RadioProcessor boards.
 
 The contents of each directory is explained below.
 
-lib            - contains the SpinAPI library
 include        - contains the SpinAPI headers
 src            - contains the source code for the SpinAPI library
 examples       - contains the source code for the SpinAPI examples
@@ -43,9 +42,83 @@ The freshly compiled programs will be inside the build directory, for example:
 	cd SpinAPI
 	sudo ./build/examples/General/pb_read_firmware
 
+
+
+3 - Root privileges:
+====================
+
 Note that root privileges are required, or the programs may segfault.
 
-3 - Contact Info:
+
+
+4 - libspinapi.so
+====================
+
+The build system will build the "libspinapi.so" and link an examples against to it.
+You have to link all your programs against this library.
+Once built, you will find "libspinapi.so" in the
+./build/src
+directory.
+
+To let the executable to find the library at a runtime you could add the path to it to the ~/.bashrc
+For example:
+export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/home/user/Documents/spincore/SpinAPI_linux/build/src
+
+
+5 - Running examples.
+====================
+
+The examples will be built in:
+./build/examples
+
+There is a 'General' folder.
+
+-----
+./build/examples/General/pb_debug
+-----
+Will create a "log.txt" file in the current directory.
+Make sure that it does not have any errors.
+
+-----
+./build/examples/General/pb_read_firmware
+-----
+
+Make sure it produces a reasonable result.
+For example:
+"Board 0 Firmware ID: 23-1"
+But not soemthink like:
+"Board 0 Firmware ID: 255-255"
+or
+"Board 0 Firmware ID: 0-0"
+
+-----
+./build/examples/General/pb_start
+-----
+Make sure it does not produce any errors.
+
+-----
+./build/examples/General/pb_start
+-----
+Make sure it does not produce any errors.
+
+
+
+After checking the "./build/examples/General/" directory
+you could run other tests.
+
+
+
+6 - Turning on debugging information.
+====================
+
+There is a function that allows you to turn on a debugging information:
+
+pb_set_debug(1);
+
+It is defined in the "src/spinapi.h"
+
+
+4 - Contact Info:
 =============
 
 Thank you for choosing a design from SpinCore Technologies, Inc. We appreciate your business!
