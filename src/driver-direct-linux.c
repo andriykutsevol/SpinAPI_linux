@@ -99,7 +99,9 @@ os_count_boards (int vend_id)
       // We are trying to get the "resource0" for every card.
       // If it is not a PCI card it will not find anything.
       // Later we will use this output for cards that for sure has a PCIe interface.
-      pci_get_resource0(detected_dev_id, &pci_resource0path_array[512*i]);
+      if (pci_get_resource0(detected_dev_id, &pci_resource0path_array[512*i]) == -1){
+        debug (DEBUG_INFO, "os_count_boards(): It is not a PCI card.");
+      }
 
 			i++;
 		}

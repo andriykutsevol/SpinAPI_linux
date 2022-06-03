@@ -114,7 +114,7 @@ int find_resource0_listdir(const char *name, int dev_id, char *result)
         }
     }
     closedir(dir);
-    debug (DEBUG_ERROR, "find_resource0_listdir(): Cannot find PCI device");
+    debug (DEBUG_INFO, "find_resource0_listdir(): Cannot find PCI device");
     return -1;
 }
 
@@ -124,7 +124,7 @@ int pci_get_resource0(int dev_id, char *result){
     const char *pci_sysdir = "/sys/devices/pci0000:00";
     
     if (find_resource0_listdir(pci_sysdir, dev_id, result) == -1){
-        debug (DEBUG_ERROR, "pci_get_resource0(): find_resource0_listdir() error");
+        debug (DEBUG_INFO, "pci_get_resource0(): find_resource0_listdir() Cannot find PCI device");
         return -1;
     }
 
