@@ -72,45 +72,29 @@ int main()
 	// Tell the driver what clock frequency the board has (in MHz)
 	pb_core_clock(clock);
 
-	printf("sofsafe: pb_start_programming() BEGIN\n");
 	pb_start_programming(PULSE_PROGRAM);
-	printf("sofsafe: pb_start_programming() END\n");
 
 	// Instruction 0 - Continue to instruction 1 in 200ms
 	// Flags = 0xFFFFFF, OPCODE = CONTINUE
-	printf("sofsafe: pb_inst() Instruction 0 BEGIN\n");
 	start = pb_inst(0xFFFFFF, CONTINUE, 0, 200.0 * ms);
-	printf("sofsafe: pb_inst() Instruction 0 END\n");
-
 
 	// Instruction 1 - Continue to instruction 2 in 100ms
 	// Flags = 0x0, OPCODE = CONTINUE
-	printf("sofsafe: pb_inst() Instruction 1 BEGIN\n");
 	pb_inst(0x0, CONTINUE, 0, 100.0 * ms);
-	printf("sofsafe: pb_inst() Instruction 1 END\n");
-
 
 	// Instruction 2 - Branch to "start" (Instruction 0) in 100ms
 	// 0x0, OPCODE = BRANCH, Target = start
-	printf("sofsafe: pb_inst() Instruction 2 BEGIN\n");
 	pb_inst(0x0, BRANCH, start, 100.0 * ms);
-	printf("sofsafe: pb_inst() Instruction 2 END\n");
 
-
-	printf("sofsafe: pb_stop_programming() BEGIN\n");
 	pb_stop_programming();
-	printf("sofsafe: pb_stop_programming() END\n");
 
 	
 	// Trigger the pulse program
 	pb_reset();
 	pb_start();
 
-	printf("sofsafe: pb_read_status() BEGIN\n");
 	//Read the status register
 	status = pb_read_status();
-	printf("sofsafe: pb_read_status() END\n");
-
 
 	printf("status: %d \n", status);
 	printf("%s\n", pb_status_message());
