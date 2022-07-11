@@ -114,7 +114,6 @@ int find_resource0_listdir(const char *name, int dev_id, char *result)
         }
     }
     closedir(dir);
-    //debug (DEBUG_INFO, "find_resource0_listdir(): Cannot find PCI device");
     return -1;
 }
 
