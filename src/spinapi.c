@@ -153,7 +153,7 @@ pb_select_board (int board_num)
 
   if (num_boards < 0)
     {
-      num_boards = pb_count_boards ();
+      num_boards = pb_count_boards();
       if (num_boards < 0) {
           return -1;
       }
