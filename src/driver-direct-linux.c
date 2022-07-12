@@ -287,7 +287,7 @@ os_inw (int card_num, unsigned int address)
   // PCI Express PulseBlaster (0x887A = 34938)
   if(dev_id_array[card_num] == 34938){
 
-    print("os_inw, card_num: %d", card_num);
+    printf("os_inw, card_num: %d", card_num);
 
     int result = 0;
     mmap_inw(&pci_resource0path_array[512*card_num], address, &result);
