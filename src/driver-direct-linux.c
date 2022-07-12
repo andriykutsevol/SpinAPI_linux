@@ -288,6 +288,8 @@ os_inw (int card_num, unsigned int address)
   if(dev_id_array[card_num] == 34938){
 
     printf("os_inw, card_num: %d\n", card_num);
+    printf("os_inw, &pci_resource0path_array[512*card_num]: %s\n", &pci_resource0path_array[512*card_num]);
+    
 
     int result = 0;
     mmap_inw(&pci_resource0path_array[512*card_num], address, &result);
