@@ -63,7 +63,7 @@ int is_pcie_device_found(char *result, char* pci_resource0path_array, int device
     printf("is_pcie_device_found: %d\n", devices_found);
     printf("is_pcie_device_found, &pci_resource0path_array[512*0]: %s\n", &pci_resource0path_array[512*0]);
 
-    return 0;
+    return 1;
 }
 
 
