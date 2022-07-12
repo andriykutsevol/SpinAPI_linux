@@ -104,7 +104,7 @@ os_count_boards (int vend_id)
       }
 
       printf("pci_resource0path_array[512*i]: i: %d\n", i);
-      printf("pci_resource0path_array[512*i]: %.*s\n", 512, pci_resource0path_array[512*i]);
+      //printf("pci_resource0path_array[512*i]: %.*s\n", 500, pci_resource0path_array[512*i]);
 
 			i++;
 		}
@@ -286,6 +286,8 @@ os_inw (int card_num, unsigned int address)
   // the cards that should be accessed with mmap.
   // PCI Express PulseBlaster (0x887A = 34938)
   if(dev_id_array[card_num] == 34938){
+
+    print("os_inw, card_num: %d", card_num);
 
     int result = 0;
     mmap_inw(&pci_resource0path_array[512*card_num], address, &result);
