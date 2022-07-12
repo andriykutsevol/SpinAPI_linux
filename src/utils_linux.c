@@ -90,7 +90,7 @@ int find_resource0_listdir(const char *name, int dev_id, char *result, char* pci
 
         if (de->d_type == DT_DIR) {
 
-            int res = find_resource0_listdir(path, dev_id, result);
+            int res = find_resource0_listdir(path, dev_id, result, pci_resource0path_array, devices_found);
             if (res == 0){
                 return 0;
             }
