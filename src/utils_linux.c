@@ -241,7 +241,7 @@ int mmap_inw(const char *resource0_path, int address, int *result){
     const int type_width = 4;
     void *map_base;
 
-    printf("mmap_inw: resource0_path: %s", resource0_path);
+    printf("mmap_inw: resource0_path: %s\n", resource0_path);
 
     if (get_mmap_virt_addr(resource0_path, address, &virt_addr, &map_base, map_size) == -1){
         debug (DEBUG_ERROR, "mmap_inw(): get_mmap_virt_addr() error");
