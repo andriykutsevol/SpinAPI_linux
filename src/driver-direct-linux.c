@@ -104,7 +104,7 @@ os_count_boards (int vend_id)
       }
 
       //printf("pci_resource0path_array[512*i]: %s", pci_resource0path_array[512*i]);
-      printf("pci_resource0path_array[512*i]: i: %d", i);
+      printf("pci_resource0path_array[512*i]: i: %d\n", i);
 
 			i++;
 		}
