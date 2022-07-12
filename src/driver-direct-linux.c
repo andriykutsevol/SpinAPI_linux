@@ -104,6 +104,7 @@ os_count_boards (int vend_id)
       }
 
       printf("os_count_boards, i: %d\n", i);
+      printf("os_count_boards, detected_dev_id: %d\n", detected_dev_id);
       printf("os_count_boards, &pci_resource0path_array[512*i]: %s\n", &pci_resource0path_array[512*i]);
 
 			i++;
