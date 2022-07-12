@@ -59,13 +59,16 @@ char *strremove(char *str, const char *sub) {
 
 
 int is_pcie_device_found(char *result, char* pci_resource0path_array, int devices_found){
+
+    printf("os_count_boards, &pci_resource0path_array[512*i]: %s\n", &pci_resource0path_array[512*i]);
+
     return 0;
 }
 
 
 
 
-int find_resource0_listdir(const char *name, int dev_id, char *result)
+int find_resource0_listdir(const char *name, int dev_id, char *result, char* pci_resource0path_array, int devices_found)
 {
     DIR *dir;
     struct dirent *de;
@@ -119,6 +122,10 @@ int find_resource0_listdir(const char *name, int dev_id, char *result)
                     //     return 0; // Это должен быть выход.
                     // }
 
+
+                    //is_pcie_device_found()
+
+
                     // Этого быть не должно уже
                     return 0;
               }
@@ -135,7 +142,7 @@ int pci_get_resource0(int dev_id, char* result, char* pci_resource0path_array, i
 
     const char *pci_sysdir = "/sys/devices/pci0000:00";
     
-    if (find_resource0_listdir(pci_sysdir, dev_id, result) == -1){
+    if (find_resource0_listdir(pci_sysdir, dev_id, result, pci_resource0path_array, devices_found) == -1){
         debug (DEBUG_INFO, "pci_get_resource0(): find_resource0_listdir() Cannot find PCI device");
         return -1;
     }
