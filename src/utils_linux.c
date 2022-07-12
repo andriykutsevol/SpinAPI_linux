@@ -124,7 +124,7 @@ int find_resource0_listdir(const char *name, int dev_id, char *result, char* pci
                     // }
 
 
-                    //is_pcie_device_found()
+                    is_pcie_device_found(result, pci_resource0path_array, devices_found);
 
 
                     // Этого быть не должно уже
