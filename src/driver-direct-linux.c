@@ -103,7 +103,7 @@ os_count_boards (int vend_id)
         debug (DEBUG_INFO, "os_count_boards(): It is not a PCI card.");
       }
 
-      printf("pci_resource0path_array[512*i]: %s", pci_resource0path_array[512*i])
+      printf("pci_resource0path_array[512*i]: %s", pci_resource0path_array[512*i]);
 
 			i++;
 		}
