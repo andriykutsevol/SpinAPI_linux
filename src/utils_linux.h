@@ -1,4 +1,8 @@
-int pci_get_resource0(int dev_id, char* resource0_path, int devices_found);
+int pci_get_resource0(int dev_id, char* resource0_path, char* pci_resource0path_array, int devices_found);
+
+// ToDo: to make all arguments const?
+int is_pcie_device_found(char *result, char* pci_resource0path_array, int devices_found);
+
 
 int get_mmap_virt_addr(const char *resource0_path, 
                         int address, 

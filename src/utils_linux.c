@@ -58,6 +58,12 @@ char *strremove(char *str, const char *sub) {
 }
 
 
+int is_pcie_device_found(char *result, char* pci_resource0path_array, int devices_found){
+    return 0;
+}
+
+
+
 
 int find_resource0_listdir(const char *name, int dev_id, char *result)
 {
@@ -107,6 +113,13 @@ int find_resource0_listdir(const char *name, int dev_id, char *result)
                     path_to_resource0 = concat(2, path_to_resource0, "/resource0");
                     stpcpy(result, path_to_resource0);
                     closedir(dir);
+
+                    // Сначала просто проверить рекурсию...
+                    // if(! is_device_found(result, pci_resource0Path_array, devices_found)){
+                    //     return 0; // Это должен быть выход.
+                    // }
+
+                    // Этого быть не должно уже
                     return 0;
               }
 
@@ -118,7 +131,7 @@ int find_resource0_listdir(const char *name, int dev_id, char *result)
 }
 
 
-int pci_get_resource0(int dev_id, char *result, int devices_found){
+int pci_get_resource0(int dev_id, char* result, char* pci_resource0path_array, int devices_found){
 
     const char *pci_sysdir = "/sys/devices/pci0000:00";
     
