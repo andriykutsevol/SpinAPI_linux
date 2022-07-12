@@ -118,7 +118,7 @@ int find_resource0_listdir(const char *name, int dev_id, char *result)
 }
 
 
-int pci_get_resource0(int dev_id, char *result){
+int pci_get_resource0(int dev_id, char *result, int devices_found){
 
     const char *pci_sysdir = "/sys/devices/pci0000:00";
     
