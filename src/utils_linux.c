@@ -60,8 +60,8 @@ char *strremove(char *str, const char *sub) {
 
 int is_pcie_device_found(char *result, char* pci_resource0path_array, int devices_found){
 
-    printf("devices_found: %d\n", devices_found);
-    printf("os_count_boards, &pci_resource0path_array[512*0]: %s\n", &pci_resource0path_array[512*0]);
+    printf("is_pcie_device_found: %d\n", devices_found);
+    printf("is_pcie_device_found, &pci_resource0path_array[512*0]: %s\n", &pci_resource0path_array[512*0]);
 
     return 0;
 }
