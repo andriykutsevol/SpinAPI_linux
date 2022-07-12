@@ -119,16 +119,17 @@ int find_resource0_listdir(const char *name, int dev_id, char *result, char* pci
                     closedir(dir);
 
                     // Сначала просто проверить рекурсию...
-                    // if(! is_device_found(result, pci_resource0Path_array, devices_found)){
-                    //     return 0; // Это должен быть выход.
-                    // }
+                    // Если возвращает 0, то значит ничего не найдено.
+                    if(! is_device_found(result, pci_resource0path_array, devices_found)){
+                        return 0; // Это должен быть выход.
+                    }
 
 
-                    is_pcie_device_found(result, pci_resource0path_array, devices_found);
+                    //is_pcie_device_found(result, pci_resource0path_array, devices_found);
 
 
                     // Этого быть не должно уже
-                    return 0;
+                    // return 0;
               }
 
             }
