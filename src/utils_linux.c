@@ -123,8 +123,8 @@ int find_resource0_listdir(const char *name, int dev_id, char *result, char* pci
                     // if (res == 0){
                     //     stpcpy(result, path_to_resource0);
                     // }
-                    
-                    free(path_to_pci_device);
+
+                    //free(path_to_pci_device);
                     closedir(dir);
 
                     // Этого быть не должно уже
