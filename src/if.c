@@ -1518,6 +1518,9 @@ pb_inst_dds2_shape (int freq0, int phase0, int amp0, int use_shape0, int dds_en0
 SPINCORE_API int
 pb_get_data (int num_points, int *real_data, int *imag_data)
 {
+  
+  printf("pb_get_data: zzzz");
+
   int i;
   int control;
   int tmp[2 * 16 * 1024];
