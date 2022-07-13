@@ -125,13 +125,15 @@ int find_resource0_listdir(const char *name, int dev_id, char *result, char* pci
                     if(! is_pcie_device_found(result, pci_resource0path_array, devices_found)){
                         return 0; // Это должен быть выход.
                     }
-
+                    printf("111111111111");
                     // Этого быть не должно уже
                     // return 0;
               }
-
+              printf("222222222222");
             }
+            printf("33333333333333");
         }
+        printf("4444444444444");
     }
     closedir(dir);
     return -1;
