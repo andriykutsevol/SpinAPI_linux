@@ -130,12 +130,14 @@ reg_read (unsigned int address)
 void
 reg_write_simple (unsigned int address, unsigned int data)
 {
+  printf("reg_write_simple: address %d\n", address);
   pb_outw (address, data);
 }
 
 unsigned int
 reg_read_simple (unsigned int address)
 {
+  printf("reg_read_simple: address %d\n", address);
   return pb_inw (address);
 }
 
