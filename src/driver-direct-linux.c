@@ -17,7 +17,6 @@
 
 static int dev_id_array[MAX_NUM_BOARDS];
 static int base_addr_array[MAX_NUM_BOARDS];
-int known_bases[MAX_NUM_BOARDS];
 static char* pci_resource0path_array = NULL;
 static int my_getline (char **lineptr, size_t * n, FILE * stream);
 static int num_cards = -1;
