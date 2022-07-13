@@ -96,17 +96,18 @@ os_count_boards (int vend_id)
 			base_addr_array[i] = detected_base;
 			dev_id_array[i] = detected_dev_id;
 
+
+      printf("--------------------------\n");
+      printf("os_count_boards, i: %d\n", i);
+      // printf("os_count_boards, detected_dev_id: %d\n", detected_dev_id);
+      // printf("os_count_boards, &pci_resource0path_array[512*i]: %s\n", &pci_resource0path_array[512*i]);
+
       // We are trying to get the "resource0" for every card.
       // If it is not a PCI card it will not find anything.
       // Later we will use this output for cards that for sure has a PCIe interface.
       if (pci_get_resource0(detected_dev_id, &pci_resource0path_array[512*i], pci_resource0path_array, i) == -1){
         debug (DEBUG_INFO, "os_count_boards(): It is not a PCI card.");
       }
-
-      printf("--------------------------\n");
-      printf("os_count_boards, i: %d\n", i);
-      // printf("os_count_boards, detected_dev_id: %d\n", detected_dev_id);
-      // printf("os_count_boards, &pci_resource0path_array[512*i]: %s\n", &pci_resource0path_array[512*i]);
 
 			i++;
 		}
