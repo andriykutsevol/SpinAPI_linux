@@ -112,22 +112,22 @@ int find_resource0_listdir(const char *name, int dev_id, char *result, char* pci
 
               sscanf(number_s, "%x", &number);
 
-              if (number == dev_id){
-                    char *path_to_pci_device = NULL;
-                    path_to_resource0 = concat(2, path, "/resource0");
-                    path_to_resource0 = strremove(path_to_resource0, "/device/resource0");
-                    path_to_resource0 = concat(2, path_to_resource0, "/resource0");
+            //   if (number == dev_id){
+            //         char *path_to_pci_device = NULL;
+            //         path_to_resource0 = concat(2, path, "/resource0");
+            //         path_to_resource0 = strremove(path_to_resource0, "/device/resource0");
+            //         path_to_resource0 = concat(2, path_to_resource0, "/resource0");
 
-                    int res = is_pcie_device_found(result, pci_resource0path_array, devices_found);
+            //         int res = is_pcie_device_found(result, pci_resource0path_array, devices_found);
 
-                    if (res == 0){
-                        stpcpy(result, path_to_resource0);
-                    }
-                    closedir(dir);
+            //         if (res == 0){
+            //             stpcpy(result, path_to_resource0);
+            //         }
+            //         closedir(dir);
 
-                    // Этого быть не должно уже
-                    // return 0;
-              }
+            //         // Этого быть не должно уже
+            //         // return 0;
+            //   }
               printf("222222222222");
             }
             printf("33333333333333");
