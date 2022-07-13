@@ -96,12 +96,6 @@ os_count_boards (int vend_id)
 			base_addr_array[i] = detected_base;
 			dev_id_array[i] = detected_dev_id;
 
-
-      printf("--------------------------\n");
-      printf("os_count_boards, i: %d\n", i);
-      // printf("os_count_boards, detected_dev_id: %d\n", detected_dev_id);
-      // printf("os_count_boards, &pci_resource0path_array[512*i]: %s\n", &pci_resource0path_array[512*i]);
-
       // We are trying to get the "resource0" for every card.
       // If it is not a PCI card it will not find anything.
       // Later we will use this output for cards that for sure has a PCIe interface.
@@ -289,10 +283,6 @@ os_inw (int card_num, unsigned int address)
   // the cards that should be accessed with mmap.
   // PCI Express PulseBlaster (0x887A = 34938)
   if(dev_id_array[card_num] == 34938){
-
-    printf("os_inw, card_num: %d\n", card_num);
-    printf("os_inw, &pci_resource0path_array[512*card_num]: %s\n", &pci_resource0path_array[512*card_num]);
-    
 
     int result = 0;
     mmap_inw(&pci_resource0path_array[512*card_num], address, &result);

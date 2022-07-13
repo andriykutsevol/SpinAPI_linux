@@ -60,55 +60,27 @@ char *strremove(char *str, const char *sub) {
 
 int if_string_in_array(char* str, char* array, int asize, int ssize){
 
-
     for(int i=0; i<asize; i=i+1){
 
         if(strcmp(str, &array[ssize*i]) == 0){       // 0 if strings are equal
             return 1;
         }
-
     }
-
     return 0;
-
-    // if(strcmp(str, "/sys/devices/pci0000:00/0000:00:02.5/0000:06:00.0/resource0") == 0){ 
-    //     return 1;
-    // }else{
-    //     return 0;
-    // }
-
 }
 
-
-
 int is_pcie_device_found(char *result, char* pci_resource0path_array, int devices_found){
-
-    printf("devices_found: %d\n", devices_found);
-    // printf("is_pcie_device_found, &pci_resource0path_array[512*devices_found]: %s\n", &pci_resource0path_array[512*devices_found]);
 
     if (devices_found == 0){
         return 0;
     }else{
-
-        printf("devices_found-1: %d, %s\n", devices_found-1, &pci_resource0path_array[512*(devices_found-1)]);
-        printf("result %s\n", result);
-
-
         if (if_string_in_array(result, pci_resource0path_array, devices_found, 512) == 1){     
-            printf("return 1\n");
             return 1;
         }else{
-            printf("return 0\n");
             return 0;
         }
-
     }
-
-
 }
-
-
-
 
 int find_resource0_listdir(const char *name, int dev_id, char *result, char* pci_resource0path_array, int devices_found)
 {
@@ -156,8 +128,6 @@ int find_resource0_listdir(const char *name, int dev_id, char *result, char* pci
                     path_to_resource0 = concat(2, path, "/resource0");
                     path_to_resource0 = strremove(path_to_resource0, "/device/resource0");
                     path_to_resource0 = concat(2, path_to_resource0, "/resource0");
-
-                    printf("path_to_resource0: %s\n", path_to_resource0);
 
                     int res = is_pcie_device_found(path_to_resource0, pci_resource0path_array, devices_found);
                     if (res == 0){
@@ -288,8 +258,6 @@ int mmap_outb(const char *resource0_path, int address, char data){
 }
 
 
-
-
 int mmap_inw(const char *resource0_path, int address, int *result){
 
     void *virt_addr;
@@ -297,8 +265,6 @@ int mmap_inw(const char *resource0_path, int address, int *result){
     const int map_size = 4096UL;
     const int type_width = 4;
     void *map_base;
-
-    //("mmap_inw: resource0_path: %s\n", resource0_path);
 
     if (get_mmap_virt_addr(resource0_path, address, &virt_addr, &map_base, map_size) == -1){
         debug (DEBUG_ERROR, "mmap_inw(): get_mmap_virt_addr() error");
@@ -312,7 +278,6 @@ int mmap_inw(const char *resource0_path, int address, int *result){
 
     return 0;
 }
-
 
 
 int mmap_outw(const char *resource0_path, int address, unsigned int data){
