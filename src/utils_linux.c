@@ -124,19 +124,24 @@ int find_resource0_listdir(const char *name, int dev_id, char *result, char* pci
                     }
 
                     free(path_to_pci_device);
+
+                    if (dir){
+                        printf("xxxxxxxxxxxxxxxxxxxxxxxx");
+                    }
+
                     //closedir(dir);
 
                     // Этого быть не должно уже
                     // return 0;
               }
-              printf("222222222222");
+              //printf("222222222222");
             }
-            printf("33333333333333");
+            //printf("33333333333333");
         }
-        printf("4444444444444");
+        //printf("4444444444444");
     }
     closedir(dir);
-    printf("55555555555555");
+    //printf("55555555555555");
     return -1;
 }
 
