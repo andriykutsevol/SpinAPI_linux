@@ -14,6 +14,15 @@
 #include <stdarg.h>
 
 
+
+// int if_num_in_array(int num, int* array, int asize){
+
+
+
+
+// }
+
+
 char* concat(int count, ...)
 {
     va_list ap;

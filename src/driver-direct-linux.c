@@ -17,6 +17,7 @@
 
 static int dev_id_array[MAX_NUM_BOARDS];
 static int base_addr_array[MAX_NUM_BOARDS];
+int known_bases[MAX_NUM_BOARDS];
 static char* pci_resource0path_array = NULL;
 static int my_getline (char **lineptr, size_t * n, FILE * stream);
 static int num_cards = -1;
@@ -68,6 +69,7 @@ os_count_boards (int vend_id)
   int detected_base;
   int detected_vend_id, detected_dev_id;
 
+
   i = 0;
   while (1) {
     if (my_getline (&buf, &size, f) < 0) {
@@ -95,6 +97,9 @@ os_count_boards (int vend_id)
 			debug (DEBUG_INFO, "os_count_boards: Found dev_id 0x%x, base_address 0x%x\n", 
 			  detected_dev_id, 
 			  detected_base);
+
+      printf("i: %d\n", i);
+      printf("detected_base: %d", detected_base);
 
 			base_addr_array[i] = detected_base;
 			dev_id_array[i] = detected_dev_id;
