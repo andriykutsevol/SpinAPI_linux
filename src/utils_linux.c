@@ -58,6 +58,19 @@ char *strremove(char *str, const char *sub) {
 }
 
 
+int if_string_in_array(char* str, char* array, int asize){
+
+
+    if(strcmp(str, "/sys/devices/pci0000:00/0000:00:02.5/0000:06:00.0/resource0") == 0){ // 0 if strings are equal
+        return 1;
+    }else{
+        return 0;
+    }           
+
+}
+
+
+
 int is_pcie_device_found(char *result, char* pci_resource0path_array, int devices_found){
 
     printf("devices_found: %d\n", devices_found);
@@ -71,7 +84,7 @@ int is_pcie_device_found(char *result, char* pci_resource0path_array, int device
         printf("result %s\n", result);
 
 
-        if (strcmp(result, "/sys/devices/pci0000:00/0000:00:02.5/0000:06:00.0/resource0") == 0){     // 0 if strings are equal
+        if (if_string_in_array(result, "/sys/devices/pci0000:00/0000:00:02.5/0000:06:00.0/resource0", devices_found) == 1){     
             printf("return 1\n");
             return 1;
         }else{
