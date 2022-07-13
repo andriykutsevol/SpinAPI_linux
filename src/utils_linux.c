@@ -75,7 +75,7 @@ int if_string_in_array(char* str, char* array, int asize, int ssize){
     //     return 1;
     // }else{
     //     return 0;
-    // }           
+    // }
 
 }
 
