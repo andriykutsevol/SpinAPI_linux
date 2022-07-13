@@ -80,7 +80,7 @@ os_count_boards (int vend_id)
     detected_vend_id = (0xFFFF0000 & id) >> 16;
     detected_dev_id = 0x0000FFFF & id;
 
-    printf("detected_dev_id: %d\n", detected_dev_id);
+    //printf("detected_dev_id: %d\n", detected_dev_id);
 
     detected_base &= ~(0x01);	// bit 0 of base address is the IO/Mem bit and not part of the address
 
