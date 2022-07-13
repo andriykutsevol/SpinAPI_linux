@@ -102,9 +102,11 @@ os_count_boards (int vend_id)
       // We are trying to get the "resource0" for every card.
       // If it is not a PCI card it will not find anything.
       // Later we will use this output for cards that for sure has a PCIe interface.
-      if (pci_get_resource0(detected_dev_id, &pci_resource0path_array[512*i], pci_resource0path_array, i) == -1){
-        debug (DEBUG_INFO, "os_count_boards(): It is not a PCI card.");
-      }
+      if(detected_dev_id == 34938){ // PCI Express PulseBlaster (0x887A = 34938))
+        if (pci_get_resource0(detected_dev_id, &pci_resource0path_array[512*i], pci_resource0path_array, i) == -1){
+          debug (DEBUG_INFO, "os_count_boards(): It is not a PCI card.");
+        }
+      } 
 
 			i++;
 		}
