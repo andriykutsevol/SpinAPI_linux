@@ -1600,6 +1600,7 @@ pb_outw (unsigned int address, unsigned int data)
       return -1;
     }
 
+  printf("pb_outw: address: %d\n", address);
   // amcc chip does not use 32 bit I/O, so this must be our custom PCI core
   return os_outw (cur_board, address, data);
 }
@@ -1617,6 +1618,8 @@ pb_inw (unsigned int address)
       debug (DEBUG_ERROR, "pb_inw: no support for usb devices");
       return -1;
     }
+
+    printf("pb_inw: address: %d\n", address);
 
   // amcc chip does not use 32 bit I/O, so this must be our custom PCI core
   return os_inw (cur_board, address);
