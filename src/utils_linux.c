@@ -140,7 +140,6 @@ int pci_get_resource0(int dev_id, char* result, char* pci_resource0path_array, i
     
     if (find_resource0_listdir(pci_sysdir, dev_id, result, pci_resource0path_array, devices_found) == -1){
         debug (DEBUG_INFO, "pci_get_resource0(): find_resource0_listdir() Cannot find PCI device");
-        printf("zzzzzzzzzzzzzzzzzzzzzz");
         return -1;
     }
 
