@@ -59,16 +59,11 @@ char *strremove(char *str, const char *sub) {
 
 
 int if_string_in_array(char* str, char* array, int asize, int ssize){
-
-    printf("asize: %d\n", asize);
-    printf("str: %s\n", str);
     for(int i=0; i<asize; i=i+1){
-        printf("&array[ssize*%d]: %s\n", i, &array[ssize*i]);
         if(strcmp(str, &array[ssize*i]) == 0){       // 0 if strings are equal
             return 1;
         }
     }
-
     return 0;
 }
 
