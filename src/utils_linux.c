@@ -65,10 +65,10 @@ int is_pcie_device_found(char *result, char* pci_resource0path_array, int device
     printf("is_pcie_device_found: result %s\n", result);
 
     if (strcmp(result, "/sys/devices/pci0000:00/0000:00:02.5/0000:06:00.0/resource0")){
-        printf("s_pcie_device_found: return 0");
+        printf("s_pcie_device_found: return 0\n");
         return 0;
     }else{
-        printf("s_pcie_device_found: return 1");
+        printf("s_pcie_device_found: return 1\n");
         return 1;
     }
 
@@ -124,13 +124,15 @@ int find_resource0_listdir(const char *name, int dev_id, char *result, char* pci
                     path_to_resource0 = strremove(path_to_resource0, "/device/resource0");
                     path_to_resource0 = concat(2, path_to_resource0, "/resource0");
 
-                    int res = is_pcie_device_found(result, pci_resource0path_array, devices_found);
-                    if (res == 0){
-                        stpcpy(result, path_to_resource0);
-                        free(path_to_pci_device);
-                        return 0;
-                    }
-                    free(path_to_pci_device);
+                    printf("path_to_resource0: %s", path_to_resource0)
+
+                    // int res = is_pcie_device_found(result, pci_resource0path_array, devices_found);
+                    // if (res == 0){
+                    //     stpcpy(result, path_to_resource0);
+                    //     free(path_to_pci_device);
+                    //     return 0;
+                    // }
+                    // free(path_to_pci_device);
               }
             }
         }
