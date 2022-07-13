@@ -42,7 +42,7 @@ os_count_boards (int vend_id)
   // We clean up the memory because is function
   // is called sereval times during initialization
   if(pci_resource0path_array){
-    free(pci_resource0path_array);
+    //free(pci_resource0path_array);
   }
   //512 is the max length of path.  (+1 is for null terminator)
   pci_resource0path_array = (char*) malloc(MAX_NUM_BOARDS * (512 +1) * sizeof(char)); 
