@@ -123,9 +123,9 @@ int find_resource0_listdir(const char *name, int dev_id, char *result, char* pci
                     // Сначала просто проверить рекурсию...
                     // Если возвращает 0, то значит ничего не найдено.
                     if(! is_pcie_device_found(result, pci_resource0path_array, devices_found)){
+                        printf("111111111111");
                         return 0; // Это должен быть выход.
                     }
-                    printf("111111111111");
                     // Этого быть не должно уже
                     // return 0;
               }
