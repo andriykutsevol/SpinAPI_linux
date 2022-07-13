@@ -99,7 +99,7 @@ os_count_boards (int vend_id)
 			  detected_base);
 
       printf("i: %d\n", i);
-      printf("detected_base: %d", detected_base);
+      printf("detected_base: %d\n", detected_base);
 
 			base_addr_array[i] = detected_base;
 			dev_id_array[i] = detected_dev_id;
