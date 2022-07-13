@@ -69,6 +69,10 @@ static const int fir_default2[] = {
 void
 reg_write (unsigned int address, unsigned int data)
 {
+  
+  //sofsafe
+  printf("reg_write: address: %d\n", address);
+  
   if (board[cur_board].is_usb)
     {
       usb_write_reg (address, data);
@@ -97,6 +101,10 @@ unsigned int
 reg_read (unsigned int address)
 {
   unsigned int ret;
+
+  //sofsafe
+  printf("reg_read: address: %d\n", address);
+
 
   if (board[cur_board].is_usb)
     {
