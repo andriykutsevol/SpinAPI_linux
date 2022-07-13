@@ -192,7 +192,7 @@ int get_mmap_virt_addr(const char *resource0_path,
     }
 
     *map_base = mmap(0, map_size, PROT_READ | PROT_WRITE, MAP_SHARED, fd, target_base);
-    printf("get_mmap_virt_addr: target_base: %ld", target_base);
+    printf("get_mmap_virt_addr: target_base: %ld\n", target_base);
 
     if(*map_base == (void *) -1){
        debug (DEBUG_ERROR, "pci_get_firmwareid(): Cannot mmap"); 
