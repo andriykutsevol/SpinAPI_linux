@@ -60,24 +60,23 @@ char *strremove(char *str, const char *sub) {
 
 int is_pcie_device_found(char *result, char* pci_resource0path_array, int devices_found){
 
-    printf("is_pcie_device_found: %d\n", devices_found);
+    printf("devices_found: %d\n", devices_found);
     // printf("is_pcie_device_found, &pci_resource0path_array[512*devices_found]: %s\n", &pci_resource0path_array[512*devices_found]);
-    // printf("is_pcie_device_found: result %s\n", result);
-
 
     if (devices_found == 0){
         return 0;
     }else{
 
-        printf("is_pcie_device_found [-1]: %s\n", &pci_resource0path_array[512*(devices_found-1)]);
+        printf("devices_found-1: %d, %s\n", devices_found-1, &pci_resource0path_array[512*(devices_found-1)]);
+        printf("is_pcie_device_found: result %s\n", result);
 
 
-        if (strcmp(result, "/sys/devices/pci0000:00/0000:00:02.5/0000:06:00.0/resource0")){
-            printf("s_pcie_device_found: return 0\n");
-            return 0;
-        }else{
-            printf("s_pcie_device_found: return 1\n");
+        if (strcmp(result, "/sys/devices/pci0000:00/0000:00:02.5/0000:06:00.0/resource0") == 0){     // 0 if strings are equal
+            printf("return 1\n");
             return 1;
+        }else{
+            printf("return 0\n");
+            return 0;
         }
 
     }
