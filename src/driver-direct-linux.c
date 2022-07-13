@@ -39,7 +39,7 @@ os_count_boards (int vend_id)
 
   size = 1000;
 
-  // We clean up the memory because is function
+  // We clean up the memory because this function
   // is called sereval times during initialization
   if(pci_resource0path_array){
     free(pci_resource0path_array);
@@ -68,6 +68,7 @@ os_count_boards (int vend_id)
   int detected_base;
   int detected_vend_id, detected_dev_id;
 
+
   i = 0;
   while (1) {
     if (my_getline (&buf, &size, f) < 0) {
@@ -79,6 +80,7 @@ os_count_boards (int vend_id)
       
     detected_vend_id = (0xFFFF0000 & id) >> 16;
     detected_dev_id = 0x0000FFFF & id;
+
     detected_base &= ~(0x01);	// bit 0 of base address is the IO/Mem bit and not part of the address
 
     if (detected_vend_id == vend_id) {
@@ -89,7 +91,7 @@ os_count_boards (int vend_id)
 	      return -1;
 			}
 
-			debug (DEBUG_INFO, "os_count_boards: Found dev_id 0x%x, base_address 0x%x\n", 
+			debug (DEBUG_INFO, "os_count_boardszzzz: Found dev_id 0x%x, base_address 0x%x\n", 
 			  detected_dev_id, 
 			  detected_base);
 
@@ -99,9 +101,11 @@ os_count_boards (int vend_id)
       // We are trying to get the "resource0" for every card.
       // If it is not a PCI card it will not find anything.
       // Later we will use this output for cards that for sure has a PCIe interface.
-      if (pci_get_resource0(detected_dev_id, &pci_resource0path_array[512*i]) == -1){
-        debug (DEBUG_INFO, "os_count_boards(): It is not a PCI card.");
-      }
+      if(detected_dev_id == 34938){ // Todo: PCI Express PulseBlaster (0x887A = 34938))
+        if (pci_get_resource0(detected_dev_id, &pci_resource0path_array[512*i], pci_resource0path_array, i) == -1){
+          debug (DEBUG_INFO, "os_count_boards(): It is not a PCI card.");
+        }
+      } 
 
 			i++;
 		}

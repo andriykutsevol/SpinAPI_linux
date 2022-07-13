@@ -153,7 +153,7 @@ pb_select_board (int board_num)
 
   if (num_boards < 0)
     {
-      num_boards = pb_count_boards ();
+      num_boards = pb_count_boards();
       if (num_boards < 0) {
           return -1;
       }
@@ -1599,7 +1599,6 @@ pb_outw (unsigned int address, unsigned int data)
       debug (DEBUG_ERROR, "pb_outw: no support for usb devices");
       return -1;
     }
-
   // amcc chip does not use 32 bit I/O, so this must be our custom PCI core
   return os_outw (cur_board, address, data);
 }

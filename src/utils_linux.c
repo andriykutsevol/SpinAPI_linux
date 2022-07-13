@@ -14,6 +14,7 @@
 #include <stdarg.h>
 
 
+
 char* concat(int count, ...)
 {
     va_list ap;
@@ -58,8 +59,29 @@ char *strremove(char *str, const char *sub) {
 }
 
 
+int if_string_in_array(char* str, char* array, int asize, int ssize){
+    for(int i=0; i<asize; i=i+1){
+        if(strcmp(str, &array[ssize*i]) == 0){       // 0 if strings are equal
+            return 1;
+        }
+    }
+    return 0;
+}
 
-int find_resource0_listdir(const char *name, int dev_id, char *result)
+int is_pcie_device_found(char *result, char* pci_resource0path_array, int devices_found){
+
+    if (devices_found == 0){
+        return 0;
+    }else{
+        if (if_string_in_array(result, pci_resource0path_array, devices_found, 512) == 1){     
+            return 1;
+        }else{
+            return 0;
+        }
+    }
+}
+
+int find_resource0_listdir(const char *name, int dev_id, char *result, char* pci_resource0path_array, int devices_found)
 {
     DIR *dir;
     struct dirent *de;
@@ -81,7 +103,7 @@ int find_resource0_listdir(const char *name, int dev_id, char *result)
 
         if (de->d_type == DT_DIR) {
 
-            int res = find_resource0_listdir(path, dev_id, result);
+            int res = find_resource0_listdir(path, dev_id, result, pci_resource0path_array, devices_found);
             if (res == 0){
                 return 0;
             }
@@ -105,11 +127,15 @@ int find_resource0_listdir(const char *name, int dev_id, char *result)
                     path_to_resource0 = concat(2, path, "/resource0");
                     path_to_resource0 = strremove(path_to_resource0, "/device/resource0");
                     path_to_resource0 = concat(2, path_to_resource0, "/resource0");
-                    stpcpy(result, path_to_resource0);
-                    closedir(dir);
-                    return 0;
-              }
 
+                    int res = is_pcie_device_found(path_to_resource0, pci_resource0path_array, devices_found);
+                    if (res == 0){
+                        stpcpy(result, path_to_resource0);
+                        free(path_to_pci_device);
+                        return 0;
+                    }
+                    free(path_to_pci_device);
+              }
             }
         }
     }
@@ -118,11 +144,11 @@ int find_resource0_listdir(const char *name, int dev_id, char *result)
 }
 
 
-int pci_get_resource0(int dev_id, char *result){
+int pci_get_resource0(int dev_id, char* result, char* pci_resource0path_array, int devices_found){
 
     const char *pci_sysdir = "/sys/devices/pci0000:00";
     
-    if (find_resource0_listdir(pci_sysdir, dev_id, result) == -1){
+    if (find_resource0_listdir(pci_sysdir, dev_id, result, pci_resource0path_array, devices_found) == -1){
         debug (DEBUG_INFO, "pci_get_resource0(): find_resource0_listdir() Cannot find PCI device");
         return -1;
     }
@@ -231,8 +257,6 @@ int mmap_outb(const char *resource0_path, int address, char data){
 }
 
 
-
-
 int mmap_inw(const char *resource0_path, int address, int *result){
 
     void *virt_addr;
@@ -255,7 +279,6 @@ int mmap_inw(const char *resource0_path, int address, int *result){
 }
 
 
-
 int mmap_outw(const char *resource0_path, int address, unsigned int data){
 
     void *virt_addr;
@@ -268,7 +291,6 @@ int mmap_outw(const char *resource0_path, int address, unsigned int data){
         debug (DEBUG_ERROR, "mmap_outw(): get_mmap_virt_addr() error");
         return -1;
     }
-
 
     *((uint32_t *) virt_addr) = data;
 
