@@ -63,8 +63,11 @@ int is_pcie_device_found(char *result, char* pci_resource0path_array, int device
     printf("is_pcie_device_found: %d\n", devices_found);
     printf("is_pcie_device_found, &pci_resource0path_array[512*0]: %s\n", &pci_resource0path_array[512*0]);
 
-    return 0;       // OK
-    //return 1;       // Error: double free or corruption (top)
+    if (strcmp(result, "/sys/devices/pci0000:00/0000:00:02.5/0000:06:00.0/resource0")){
+        return 0;
+    }else{
+        return 1;
+    }
 
 }
 
