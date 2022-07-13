@@ -70,9 +70,6 @@ void
 reg_write (unsigned int address, unsigned int data)
 {
   
-  //sofsafe
-  printf("reg_write: address: %d\n", address);
-  
   if (board[cur_board].is_usb)
     {
       usb_write_reg (address, data);
@@ -102,10 +99,6 @@ reg_read (unsigned int address)
 {
   unsigned int ret;
 
-  //sofsafe
-  printf("reg_read: address: %d\n", address);
-
-
   if (board[cur_board].is_usb)
     {
       debug(DEBUG_INFO, "Using usb_read_reg.");
@@ -130,14 +123,12 @@ reg_read (unsigned int address)
 void
 reg_write_simple (unsigned int address, unsigned int data)
 {
-  printf("reg_write_simple: address %d\n", address);
   pb_outw (address, data);
 }
 
 unsigned int
 reg_read_simple (unsigned int address)
 {
-  printf("reg_read_simple: address %d\n", address);
   return pb_inw (address);
 }
 
@@ -1518,9 +1509,6 @@ pb_inst_dds2_shape (int freq0, int phase0, int amp0, int use_shape0, int dds_en0
 SPINCORE_API int
 pb_get_data (int num_points, int *real_data, int *imag_data)
 {
-  
-  printf("pb_get_data: zzzz");
-
   int i;
   int control;
   int tmp[2 * 16 * 1024];
@@ -1626,9 +1614,6 @@ pb_get_data (int num_points, int *real_data, int *imag_data)
       // Otherwise just read ram in the normal way
       else
         {
-          // Reset memory address register
-          pb_outw (MEM_ADDRESS, 0);
-
           //loop num_points times and read values from ram
           for (i = 0; i < num_points; i++)
             {

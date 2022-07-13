@@ -250,8 +250,6 @@ os_outw (int card_num, unsigned int address, unsigned int data)
     return -1;
   }
 
-  printf("os_inw: address: %d\n", address);
-
   // At this place, we have to define all
   // the cards that should be accessed with mmap.
   // PCI Express PulseBlaster (0x887A = 34938)
@@ -280,8 +278,6 @@ os_inw (int card_num, unsigned int address)
     debug (DEBUG_ERROR, "os_inw: Card number out of range");
     return -1;
   }
-
-  printf("os_inw: address: %d\n", address);
 
   // At this place, we have to define all
   // the cards that should be accessed with mmap.

@@ -192,7 +192,6 @@ int get_mmap_virt_addr(const char *resource0_path,
     }
 
     *map_base = mmap(0, map_size, PROT_READ | PROT_WRITE, MAP_SHARED, fd, target_base);
-    printf("get_mmap_virt_addr: target_base: %ld\n", target_base);
 
     if(*map_base == (void *) -1){
        debug (DEBUG_ERROR, "pci_get_firmwareid(): Cannot mmap"); 
@@ -267,8 +266,6 @@ int mmap_inw(const char *resource0_path, int address, int *result){
     const int type_width = 4;
     void *map_base;
 
-    printf("mmap_inw: address: %d\n", address);
-
     if (get_mmap_virt_addr(resource0_path, address, &virt_addr, &map_base, map_size) == -1){
         debug (DEBUG_ERROR, "mmap_inw(): get_mmap_virt_addr() error");
         return -1;
@@ -291,13 +288,10 @@ int mmap_outw(const char *resource0_path, int address, unsigned int data){
     const int type_width = 4;
     void *map_base;
 
-    printf("mmap_outw: address: %d\n", address);
-
     if (get_mmap_virt_addr(resource0_path, address, &virt_addr, &map_base, map_size) == -1){
         debug (DEBUG_ERROR, "mmap_outw(): get_mmap_virt_addr() error");
         return -1;
     }
-
 
     *((uint32_t *) virt_addr) = data;
 
