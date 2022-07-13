@@ -125,7 +125,7 @@ int find_resource0_listdir(const char *name, int dev_id, char *result, char* pci
                     // }
 
                     //free(path_to_pci_device);
-                    closedir(dir);
+                    //closedir(dir);
 
                     // Этого быть не должно уже
                     // return 0;
