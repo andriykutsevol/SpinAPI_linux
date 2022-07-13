@@ -60,17 +60,19 @@ char *strremove(char *str, const char *sub) {
 
 int is_pcie_device_found(char *result, char* pci_resource0path_array, int devices_found){
 
-    printf("is_pcie_device_found: %d\n", devices_found);
-    printf("is_pcie_device_found, &pci_resource0path_array[512*devices_found]: %s\n", &pci_resource0path_array[512*devices_found]);
-    printf("is_pcie_device_found: result %s\n", result);
+    // printf("is_pcie_device_found: %d\n", devices_found);
+    // printf("is_pcie_device_found, &pci_resource0path_array[512*devices_found]: %s\n", &pci_resource0path_array[512*devices_found]);
+    // printf("is_pcie_device_found: result %s\n", result);
 
-    if (strcmp(result, "/sys/devices/pci0000:00/0000:00:02.5/0000:06:00.0/resource0")){
-        printf("s_pcie_device_found: return 0\n");
-        return 0;
-    }else{
-        printf("s_pcie_device_found: return 1\n");
-        return 1;
-    }
+    // if (strcmp(result, "/sys/devices/pci0000:00/0000:00:02.5/0000:06:00.0/resource0")){
+    //     printf("s_pcie_device_found: return 0\n");
+    //     return 0;
+    // }else{
+    //     printf("s_pcie_device_found: return 1\n");
+    //     return 1;
+    // }
+
+    return 0;
 
 }
 
@@ -126,13 +128,13 @@ int find_resource0_listdir(const char *name, int dev_id, char *result, char* pci
 
                     printf("path_to_resource0: %s\n", path_to_resource0);
 
-                    // int res = is_pcie_device_found(result, pci_resource0path_array, devices_found);
-                    // if (res == 0){
-                    //     stpcpy(result, path_to_resource0);
-                    //     free(path_to_pci_device);
-                    //     return 0;
-                    // }
-                    // free(path_to_pci_device);
+                    int res = is_pcie_device_found(result, pci_resource0path_array, devices_found);
+                    if (res == 0){
+                        stpcpy(result, path_to_resource0);
+                        free(path_to_pci_device);
+                        return 0;
+                    }
+                    free(path_to_pci_device);
               }
             }
         }
