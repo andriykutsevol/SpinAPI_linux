@@ -63,7 +63,9 @@ int is_pcie_device_found(char *result, char* pci_resource0path_array, int device
     printf("is_pcie_device_found: %d\n", devices_found);
     printf("is_pcie_device_found, &pci_resource0path_array[512*0]: %s\n", &pci_resource0path_array[512*0]);
 
-    return 1;
+    //return 0;       // OK
+    return 1;       // Error: double free or corruption (top)
+
 }
 
 
@@ -123,10 +125,6 @@ int find_resource0_listdir(const char *name, int dev_id, char *result, char* pci
                     if(! is_pcie_device_found(result, pci_resource0path_array, devices_found)){
                         return 0; // Это должен быть выход.
                     }
-
-
-                    //is_pcie_device_found(result, pci_resource0path_array, devices_found);
-
 
                     // Этого быть не должно уже
                     // return 0;
