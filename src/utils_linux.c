@@ -63,7 +63,7 @@ int if_string_in_array(char* str, char* array, int asize, int ssize){
 
     for(int i=0; i<asize; i=i+1){
 
-        if(strcmp(str, array[ssize*i]) == 0){       // 0 if strings are equal
+        if(strcmp(str, &array[ssize*i]) == 0){       // 0 if strings are equal
             return 1;
         }
 
