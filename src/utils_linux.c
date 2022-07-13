@@ -117,12 +117,17 @@ int find_resource0_listdir(const char *name, int dev_id, char *result, char* pci
                     path_to_resource0 = concat(2, path, "/resource0");
                     path_to_resource0 = strremove(path_to_resource0, "/device/resource0");
                     path_to_resource0 = concat(2, path_to_resource0, "/resource0");
-                    stpcpy(result, path_to_resource0);
-                    closedir(dir);
+
 
                     // Сначала просто проверить рекурсию...
                     // Если возвращает 0, то значит ничего не найдено.
                     int res = is_pcie_device_found(result, pci_resource0path_array, devices_found);
+
+                    if (res == 0){
+                        stpcpy(result, path_to_resource0);
+                    }
+                    closedir(dir);
+
                     // if(! is_pcie_device_found(result, pci_resource0path_array, devices_found)){
                     //     printf("111111111111");
                     //     sleep(10);
