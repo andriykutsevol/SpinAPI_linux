@@ -127,9 +127,8 @@ int find_resource0_listdir(const char *name, int dev_id, char *result, char* pci
 
                     if (dir){
                         printf("xxxxxxxxxxxxxxxxxxxxxxxx");
+                        closedir(dir);
                     }
-
-                    //closedir(dir);
 
                     // Этого быть не должно уже
                     // return 0;
