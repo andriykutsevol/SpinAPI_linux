@@ -39,7 +39,7 @@ os_count_boards (int vend_id)
 
   size = 1000;
 
-  // We clean up the memory because is function
+  // We clean up the memory because this function
   // is called sereval times during initialization
   if(pci_resource0path_array){
     free(pci_resource0path_array);
@@ -79,6 +79,9 @@ os_count_boards (int vend_id)
       
     detected_vend_id = (0xFFFF0000 & id) >> 16;
     detected_dev_id = 0x0000FFFF & id;
+
+    printf("detected_dev_id: %d\n", detected_dev_id);
+
     detected_base &= ~(0x01);	// bit 0 of base address is the IO/Mem bit and not part of the address
 
     if (detected_vend_id == vend_id) {
