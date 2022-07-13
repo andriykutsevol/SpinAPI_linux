@@ -129,7 +129,7 @@ int find_resource0_listdir(const char *name, int dev_id, char *result, char* pci
                     //     return 0; // Это должен быть выход.
                     // }
                     // Этого быть не должно уже
-                    return 0;
+                    // return 0;
               }
               printf("222222222222");
             }
