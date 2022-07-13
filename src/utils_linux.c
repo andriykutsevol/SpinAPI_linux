@@ -60,12 +60,16 @@ char *strremove(char *str, const char *sub) {
 
 int if_string_in_array(char* str, char* array, int asize, int ssize){
 
-    printf("ssize: %d\n", asize);
+    printf("asize: %d\n", asize);
+    int flg = 0;
     for(int i=0; i<asize; i=i+1){
 
         if(strcmp(str, &array[ssize*i]) == 0){       // 0 if strings are equal
-            return 1;
+            flg = flg + 1;
         }
+    }
+    if (flg >= asize){
+        return 1;
     }
     return 0;
 }
