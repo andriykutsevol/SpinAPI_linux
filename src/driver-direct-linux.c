@@ -79,12 +79,8 @@ os_count_boards (int vend_id)
 		// commented since ret is never used
     sscanf (buf, "%x %x %s %x ", &dummy, &id, name, &detected_base);
       
-    printf("detected_base: %x\n", detected_base);
-
     detected_vend_id = (0xFFFF0000 & id) >> 16;
     detected_dev_id = 0x0000FFFF & id;
-
-    //printf("detected_dev_id: %d\n", detected_dev_id);
 
     detected_base &= ~(0x01);	// bit 0 of base address is the IO/Mem bit and not part of the address
 
@@ -96,12 +92,9 @@ os_count_boards (int vend_id)
 	      return -1;
 			}
 
-			debug (DEBUG_INFO, "os_count_boards: Found dev_id 0x%x, base_address 0x%x\n", 
+			debug (DEBUG_INFO, "os_count_boardszzzz: Found dev_id 0x%x, base_address 0x%x\n", 
 			  detected_dev_id, 
 			  detected_base);
-
-      printf("i: %d\n", i);
-      printf("detected_base: %x\n", detected_base);
 
 			base_addr_array[i] = detected_base;
 			dev_id_array[i] = detected_dev_id;
