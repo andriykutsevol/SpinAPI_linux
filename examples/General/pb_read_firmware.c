@@ -37,7 +37,7 @@ int main(int argc, char **argv)
 	// current
 	// directory that can help debug any problems that you may be
 	// experiencing 
-	// pb_set_debug(1);
+	pb_set_debug(1);
 
 	printf("Copyright (c) 2010 SpinCore Technologies, Inc.\n\n");
 
