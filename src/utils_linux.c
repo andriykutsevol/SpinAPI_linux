@@ -68,7 +68,7 @@ int is_pcie_device_found(char *result, char* pci_resource0path_array, int device
     }else{
 
         printf("devices_found-1: %d, %s\n", devices_found-1, &pci_resource0path_array[512*(devices_found-1)]);
-        printf("is_pcie_device_found: result %s\n", result);
+        printf("result %s\n", result);
 
 
         if (strcmp(result, "/sys/devices/pci0000:00/0000:00:02.5/0000:06:00.0/resource0") == 0){     // 0 if strings are equal
@@ -136,7 +136,7 @@ int find_resource0_listdir(const char *name, int dev_id, char *result, char* pci
 
                     printf("path_to_resource0: %s\n", path_to_resource0);
 
-                    int res = is_pcie_device_found(result, pci_resource0path_array, devices_found);
+                    int res = is_pcie_device_found(path_to_resource0, pci_resource0path_array, devices_found);
                     if (res == 0){
                         stpcpy(result, path_to_resource0);
                         free(path_to_pci_device);
