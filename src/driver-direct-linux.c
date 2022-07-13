@@ -250,7 +250,7 @@ os_outw (int card_num, unsigned int address, unsigned int data)
     return -1;
   }
 
-  printf("os_inw: address: %d", address);
+  printf("os_inw: address: %d\n", address);
 
   // At this place, we have to define all
   // the cards that should be accessed with mmap.
@@ -281,7 +281,7 @@ os_inw (int card_num, unsigned int address)
     return -1;
   }
 
-  printf("os_inw: address: %d", address);
+  printf("os_inw: address: %d\n", address);
 
   // At this place, we have to define all
   // the cards that should be accessed with mmap.
