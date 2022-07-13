@@ -121,26 +121,15 @@ int find_resource0_listdir(const char *name, int dev_id, char *result, char* pci
                     int res = is_pcie_device_found(result, pci_resource0path_array, devices_found);
                     if (res == 0){
                         stpcpy(result, path_to_resource0);
+                        free(path_to_pci_device);
+                        return 0;
                     }
-
                     free(path_to_pci_device);
-
-                    if (dir){
-                        printf("xxxxxxxxxxxxxxxxxxxxxxxx");
-                        closedir(dir);
-                    }
-
-                    // Этого быть не должно уже
-                    // return 0;
               }
-              //printf("222222222222");
             }
-            //printf("33333333333333");
         }
-        //printf("4444444444444");
     }
     closedir(dir);
-    //printf("55555555555555");
     return -1;
 }
 
