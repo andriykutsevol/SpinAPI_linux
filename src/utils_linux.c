@@ -124,7 +124,7 @@ int find_resource0_listdir(const char *name, int dev_id, char *result, char* pci
                     path_to_resource0 = strremove(path_to_resource0, "/device/resource0");
                     path_to_resource0 = concat(2, path_to_resource0, "/resource0");
 
-                    printf("path_to_resource0: %s", path_to_resource0)
+                    printf("path_to_resource0: %s", path_to_resource0);
 
                     // int res = is_pcie_device_found(result, pci_resource0path_array, devices_found);
                     // if (res == 0){
