@@ -32,7 +32,7 @@ src				- contains the source code for the SpinAPI library
 2 - PCI-e
 =========
 
-Linux driver supports products with id "0x887A" only.
+Linux driver supports products with pid "0x887A" only.
 
 
 
