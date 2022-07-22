@@ -60,10 +60,24 @@ The freshly compiled programs will be inside the build directory, for example:
 
 
 
-4 - Root privileges:
+4 - Root privileges/udev:
 ====================
 
 Note that root privileges are required, or the programs may segfault.
+
+
+Device permissions must be set properly in order run SpinAPI programs. 
+It is recommended that users set device permissions using a udev rules file. 
+An example udev rules file can be found here: 99-spincore.rules. 
+This file should typically be placed in "/etc/udev/rules.d/", but this path may vary depending on your Linux distribution. 
+This file is created for the RadioProcessorUSB and PulseBlasterUSB boards. 
+Once the rules file has been added, 
+you can update the system rules using the command "udevadm control --reload-rules". 
+If the SpinCore board is plugged in while performing this step, power the board off and on. 
+Any user in group "spincore" should now have access to the board. 
+
+Alternatively, applications may be run as root, but this is not recommended.
+
 
 
 
