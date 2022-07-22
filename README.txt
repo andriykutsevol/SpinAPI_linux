@@ -5,7 +5,11 @@ Table of Contents
 -----------------
 1. Overview
 2. Compilation Support
-3. Contact Info
+3. Root privileges
+4. libspinapi.so
+5. Running examples.
+6. Turning on debugging information.
+7. Contact Info
 
 1 - Overview:
 =========
@@ -16,9 +20,11 @@ and RadioProcessor boards.
 
 The contents of each directory is explained below.
 
-include        - contains the SpinAPI headers
-src            - contains the source code for the SpinAPI library
-examples       - contains the source code for the SpinAPI examples
+examples		- contains the source code for the SpinAPI examples
+include			- contains the SpinAPI headers
+interpreter		- SpinAPI CLI
+src				- contains the source code for the SpinAPI library
+
 
 2 - Compilation Support:
 ====================
@@ -118,7 +124,7 @@ pb_set_debug(1);
 It is defined in the "src/spinapi.h"
 
 
-4 - Contact Info:
+7 - Contact Info:
 =============
 
 Thank you for choosing a design from SpinCore Technologies, Inc. We appreciate your business!
