@@ -4,12 +4,13 @@ SpinAPI
 Table of Contents
 -----------------
 1. Overview
-2. Compilation Support
-3. Root privileges
-4. libspinapi.so
-5. Running examples.
-6. Turning on debugging information.
-7. Contact Info
+2. PCI-e
+3. Compilation Support
+4. Root privileges
+5. libspinapi.so
+6. Running examples
+7. Turning on debugging information
+8. Contact Info
 
 1 - Overview:
 =========
@@ -17,6 +18,7 @@ Table of Contents
 This archive contains drivers which will work for PB24, PBDDS-I-300, PBDDS-II, PBDDS-III, 
 PulseBlasterESR, PulseBlasterESR-PRO, PulseBlasterESR-PRO-II, PB-DualCore, PB-QuadCore, USB-PTS, 
 and RadioProcessor boards.
+
 
 The contents of each directory is explained below.
 
@@ -26,7 +28,15 @@ interpreter		- SpinAPI CLI
 src				- contains the source code for the SpinAPI library
 
 
-2 - Compilation Support:
+
+2 - PCI-e
+=========
+
+Linux driver supports products with id "0x887A" only.
+
+
+
+3 - Compilation Support:
 ====================
 
 Required packages, on Ubuntu 18.04: build-essential cmake
@@ -50,14 +60,14 @@ The freshly compiled programs will be inside the build directory, for example:
 
 
 
-3 - Root privileges:
+4 - Root privileges:
 ====================
 
 Note that root privileges are required, or the programs may segfault.
 
 
 
-4 - libspinapi.so
+5 - libspinapi.so
 ====================
 
 The build system will build the "libspinapi.so" and link an examples against to it.
@@ -71,7 +81,7 @@ For example:
 export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/home/user/Documents/spincore/SpinAPI_linux/build/src
 
 
-5 - Running examples.
+6 - Running examples.
 ====================
 
 The examples will be built in:
@@ -114,7 +124,7 @@ you could run other tests.
 
 
 
-6 - Turning on debugging information.
+7 - Turning on debugging information.
 ====================
 
 There is a function that allows you to turn on a debugging information:
@@ -124,7 +134,7 @@ pb_set_debug(1);
 It is defined in the "src/spinapi.h"
 
 
-7 - Contact Info:
+8 - Contact Info:
 =============
 
 Thank you for choosing a design from SpinCore Technologies, Inc. We appreciate your business!
